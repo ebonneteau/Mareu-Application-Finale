@@ -1,9 +1,11 @@
 package com.example.mareu.model;
 
-import java.util.Date;
+
+
+import java.time.LocalTime;
 import java.util.Objects;
 
-public class Participant {
+public class Attendees {
 
 
     /** Identifier */
@@ -13,7 +15,7 @@ public class Participant {
     private String name;
 
     /** Date */
-    private Date date;
+    private String time;
 
     /** Place */
     private String place;
@@ -22,13 +24,13 @@ public class Participant {
      * Constructor
      * @param id
      * @param name
-     * @param date
+     * @param time
      * @param place
      */
-    public Participant(Integer id, String name, Date date,String place ) {
+    public Attendees(Integer id, String name, String time, String place ) {
         this.id = id;
         this.name = name;
-        this.date = date;
+        this.time = time;
         this.place = place;
     }
 
@@ -48,12 +50,12 @@ public class Participant {
         this.name = name;
     }
 
-    public Date getDate() {
-        return date;
+    public String getTime() {
+        return time;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getPlace() {
@@ -68,8 +70,8 @@ public class Participant {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Participant participant = (Participant) o;
-        return Objects.equals(id, participant.id);
+        Attendees attendees = (Attendees) o;
+        return Objects.equals(id, attendees.id);
     }
 
     @Override
