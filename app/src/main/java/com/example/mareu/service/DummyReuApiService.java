@@ -3,7 +3,7 @@ package com.example.mareu.service;
 import com.example.mareu.model.Attendees;
 
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class DummyReuApiService implements ReuApiService {
 
-    private List<Attendees> attendees = DummyReuGenerator.generateAttendees();
+    private List<Attendees> attendeeObject = DummyReuGenerator.generateAttendees();
 
 
 
@@ -21,11 +21,12 @@ public class DummyReuApiService implements ReuApiService {
      */
     @Override
     public List<Attendees> getAttendees() {
-        return attendees;
+        return attendeeObject;
     }
 
     @Override
     public void deleteAttendees(Attendees attendees) {
+        attendeeObject.remove(attendees);
 
     }
 

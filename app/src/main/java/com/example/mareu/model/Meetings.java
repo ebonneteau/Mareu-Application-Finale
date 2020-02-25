@@ -2,10 +2,9 @@ package com.example.mareu.model;
 
 
 
-import java.time.LocalTime;
 import java.util.Objects;
 
-public class Attendees {
+public class Meetings {
 
 
     /** Identifier */
@@ -27,7 +26,7 @@ public class Attendees {
      * @param time
      * @param place
      */
-    public Attendees(Integer id, String name, String time, String place ) {
+    public Meetings(Integer id, String name, String time, String place ) {
         this.id = id;
         this.name = name;
         this.time = time;
@@ -70,7 +69,7 @@ public class Attendees {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Attendees attendees = (Attendees) o;
+        Meetings attendees = (Meetings) o;
         return Objects.equals(id, attendees.id);
     }
 

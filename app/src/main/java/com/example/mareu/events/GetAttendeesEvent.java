@@ -4,7 +4,7 @@ package com.example.mareu.events;
 import com.example.mareu.model.Attendees;
 
 /**
- * Event fired when a user wants to add a Neighbour object into Favorite List (second callBack addFavoriteEvent)
+ * Event fired when a user wants to add an Attendee
  */
 public class GetAttendeesEvent {
     public Attendees attendees;

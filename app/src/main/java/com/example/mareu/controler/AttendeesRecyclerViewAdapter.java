@@ -28,6 +28,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
+
+
 public class AttendeesRecyclerViewAdapter extends RecyclerView.Adapter<AttendeesRecyclerViewAdapter.ViewHolder> {
 
     private final List<Attendees> mAttendees;
@@ -51,11 +53,11 @@ public class AttendeesRecyclerViewAdapter extends RecyclerView.Adapter<Attendees
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Attendees attendees = mAttendees.get(position);
-        holder.mAttendeesName.setText(attendees.getName());
-        //Glide.with(holder.mAttendeesName.getContext())
-              // .load(attendees.getName())
-               //.apply(RequestOptions.circleCropTransform())
-               //.into(holder.mAttendeesName);
+        holder.mAttendeesName.setText(attendees.getPlace());
+        Glide.with(holder.mAttendeesName.getContext())
+              .load(R.drawable.ic_launcher_foreground)
+              .apply(RequestOptions.circleCropTransform())
+              .into(holder.mFakeImage);
 
 
         holder.mDeleteButton.setOnClickListener(v -> {
@@ -88,6 +90,8 @@ public class AttendeesRecyclerViewAdapter extends RecyclerView.Adapter<Attendees
         public TextView mAttendeesName;
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
+        @BindView(R.id.item_list_attendees)
+                public ImageView mFakeImage;
 
         ViewHolder(View view) {
             super(view);
