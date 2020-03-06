@@ -1,8 +1,8 @@
 package com.example.mareu.DI;
 
+
 import com.example.mareu.service.DummyReuApiService;
 import com.example.mareu.service.ReuApiService;
-
 
 /**
  * Dependency injector to get instance of services

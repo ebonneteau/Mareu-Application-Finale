@@ -9,12 +9,12 @@ import android.view.View;
 
 import com.example.mareu.R;
 
-public class AttendeeDetailsActivity extends AppCompatActivity {
+public class MeetingDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_attendee_details);
+        setContentView(R.layout.activity_meeting_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

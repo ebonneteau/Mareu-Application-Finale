@@ -15,7 +15,8 @@ import android.view.ViewGroup;
 import com.example.mareu.DI.DI;
 import com.example.mareu.R;
 import com.example.mareu.events.DeleteAttendeesEvent;
-import com.example.mareu.model.Attendees;
+import com.example.mareu.events.DeleteMeetingEvent;
+import com.example.mareu.model.Meetings;
 import com.example.mareu.service.ReuApiService;
 
 import org.greenrobot.eventbus.EventBus;
@@ -25,10 +26,10 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class AttendeesFragment extends Fragment {
+public class MeetingsFragment extends Fragment {
 
     private ReuApiService mApiService;
-    private List<Attendees> mAttendees;
+    private List<Meetings> mMeetings;
     private RecyclerView mRecyclerView;
 
 
@@ -36,11 +37,11 @@ public class AttendeesFragment extends Fragment {
      * Create and return a new instance
      *
      * @param i
-     * @return @{@link AttendeesFragment}
+     * @return @{@link MeetingsFragment}
      */
-    public static AttendeesFragment newInstance(int i) {
-        AttendeesFragment fragment;
-        fragment = new AttendeesFragment();
+    public static MeetingsFragment newInstance(int i) {
+        MeetingsFragment fragment;
+        fragment = new MeetingsFragment();
         return fragment;
     }
 
@@ -54,7 +55,7 @@ public class AttendeesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_attendees_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_meetings_list, container, false);
 
         Context context = view.getContext();
         mRecyclerView = (RecyclerView) view;
@@ -72,8 +73,8 @@ public class AttendeesFragment extends Fragment {
      */
     private void initList() {
 
-        mAttendees = mApiService.getAttendees();
-        mRecyclerView.setAdapter(new AttendeesRecyclerViewAdapter(mAttendees));
+        mMeetings = mApiService.getMeetings();
+        mRecyclerView.setAdapter(new MeetingsRecyclerViewAdapter(mMeetings));
     }
 
     @Override
@@ -94,8 +95,8 @@ public class AttendeesFragment extends Fragment {
      * @param event
      */
     @Subscribe
-    public void onDeleteAttendees (DeleteAttendeesEvent event) {
-        mApiService.deleteAttendees(event.attendees);
+    public void onDeleteMeeting (DeleteMeetingEvent event) {
+        mApiService.deleteMeeting(event.meetings);
         Objects.requireNonNull(mRecyclerView.getAdapter()).notifyDataSetChanged();
 
     }

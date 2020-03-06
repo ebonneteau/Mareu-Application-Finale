@@ -1,10 +1,9 @@
 package com.example.mareu.service;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 
-import com.example.mareu.model.Attendees;
 
-import java.time.LocalTime;
+
+import com.example.mareu.model.Places;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,23 +11,23 @@ import java.util.List;
 
 abstract class DummyReuGenerator {
 
-    static List<Attendees> DUMMY_ATTENDEES = Arrays.asList(
-            new Attendees(1, "Caroline", "08:59:00" ,"Réunion 1"),
-            new Attendees(2, "Jack","23:59:59" ,"Réunion 2"),
-            new Attendees(3, "Chloé", "09:59:59" ,"Réunion 3"),
-            new Attendees(4, "Vincent", "06:00:00" ,"Réunion 4"),
-            new Attendees(5, "Elodie", "10:59:59" ,"Réunion 5"),
-            new Attendees(6, "Sylvain", "12:00:00" ,"Réunion 6"),
-            new Attendees(7, "Laetitia", "13:00:00" ,"Réunion 7"),
-            new Attendees(8, "Dan", "14:00:00" ,"Réunion 8"),
-            new Attendees(9, "Joseph", "15:00:00" ,"Réunion 9"),
-            new Attendees(10, "Emma", "12:00:00" ,"Réunion 10")
+    static List<Places> LIST_PLACES = Arrays.asList(
+            new Places(1,"Mario"),
+            new Places(2, "Luigi"),
+            new Places(3, "Athena"),
+            new Places(4, "Monica"),
+            new Places(5, "Todd"),
+            new Places(6, "Maria"),
+            new Places(7, "Mercury"),
+            new Places(8, "Atlanta"),
+            new Places(9, "Chicago"),
+            new Places(10, "Novea")
 
     );
 
-    static List<Attendees> generateAttendees() {
+    static List<Places> generatePlaces() {
 
-        return new ArrayList<>(DUMMY_ATTENDEES);
+        return new ArrayList<>(LIST_PLACES);
     }
 
 

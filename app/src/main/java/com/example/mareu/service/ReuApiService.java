@@ -3,7 +3,11 @@ package com.example.mareu.service;
 
 
 
+
+
 import com.example.mareu.model.Attendees;
+import com.example.mareu.model.Meetings;
+import com.example.mareu.model.Places;
 
 import java.util.List;
 
@@ -14,20 +18,23 @@ import java.util.List;
 public interface ReuApiService {
 
     /**
-     * Get all my Neighbours
+     * Get all Places
      *
      * @return {@link List}
      */
-    List<Attendees> getAttendees();
+    List<Places> getPlaces();
+
+    List<Meetings> getMeetings();
 
 
 
 
     /**
-     * Deletes a neighbour
+     * Deletes attendee
      */
     void deleteAttendees(Attendees attendees);
 
+    void deleteMeeting (Meetings meetings);
 
 
 

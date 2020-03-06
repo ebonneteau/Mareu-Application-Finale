@@ -9,7 +9,7 @@
 
 
     <ImageView
-        android:id="@+id/item_list_attendees"
+        android:id="@+id/item_list_places"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -21,14 +21,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/item_list_name"
+        android:id="@+id/item_list_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/item_list_attendees"
-        app:layout_constraintStart_toEndOf="@+id/item_list_attendees"
-        app:layout_constraintTop_toTopOf="@+id/item_list_attendees" />
+        app:layout_constraintBottom_toBottomOf="@+id/item_list_places"
+        app:layout_constraintStart_toEndOf="@+id/item_list_places"
+        app:layout_constraintTop_toTopOf="@+id/item_list_places" />
 
     <ImageButton
         android:id="@+id/item_list_delete_button"
@@ -36,9 +36,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/item_list_name"
+        app:layout_constraintBottom_toBottomOf="@+id/item_list_place"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/item_list_name"
+        app:layout_constraintTop_toTopOf="@+id/item_list_place"
         app:srcCompat="@drawable/ic_delete" />
 
 

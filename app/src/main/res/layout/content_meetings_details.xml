@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".controler.AttendeeDetailsActivity"
-    tools:showIn="@layout/activity_attendee_details">
+    tools:context=".controler.MeetingDetailsActivity"
+    tools:showIn="@layout/activity_meeting_details">
 
     <TextView
         android:layout_width="wrap_content"

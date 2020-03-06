@@ -4,14 +4,14 @@ package com.example.mareu.model;
 
 import java.util.Objects;
 
-public class Attendees {
+public class Places {
 
 
     /** Identifier */
     private Integer id;
 
     /** Full name */
-    private String mailAddress;
+    private String place;
 
 
 
@@ -20,11 +20,11 @@ public class Attendees {
     /**
      * Constructor
      * @param id
-     * @param mailAddress
+     * @param place
      */
-    public Attendees(Integer id, String mailAddress) {
+    public Places(Integer id, String place) {
         this.id = id;
-        this.mailAddress = mailAddress;
+        this.place = place;
 
 
     }
@@ -37,12 +37,12 @@ public class Attendees {
         this.id = id;
     }
 
-    public String getmailAddress() {
-        return mailAddress;
+    public String getPlace() {
+        return place;
     }
 
-    public void setmailAddress(String mailAddress) {
-        this.mailAddress = mailAddress;
+    public void setPlace(String place) {
+        this.place = place;
     }
 
 
@@ -52,7 +52,7 @@ public class Attendees {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Attendees attendees = (Attendees) o;
+        Places attendees = (Places) o;
         return Objects.equals(id, attendees.id);
     }
 

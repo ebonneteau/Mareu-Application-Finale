@@ -2,6 +2,8 @@ package com.example.mareu.model;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Meetings {
@@ -11,26 +13,36 @@ public class Meetings {
     private Integer id;
 
     /** Full name */
-    private String name;
+    private String subject;
 
     /** Time */
     private String time;
 
     /** Place */
     private String place;
+    private List<Attendees> attendees;
+
+    public Meetings(Integer id, String subject, String time, String place, List<Attendees> attendees) {
+        this.id = id;
+        this.subject = subject;
+        this.time = time;
+        this.place = place;
+        this.attendees = attendees;
+    }
 
     /**
      * Constructor
      * @param id
-     * @param name
+     * @param subject
      * @param time
      * @param place
      */
-    public Meetings(Integer id, String name, String time, String place ) {
+    public Meetings(Integer id, String subject, String time, String place ) {
         this.id = id;
-        this.name = name;
+        this.subject = subject;
         this.time = time;
         this.place = place;
+        this.attendees = new ArrayList<>();
     }
 
     public Integer getId() {
@@ -41,12 +53,12 @@ public class Meetings {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getSubject() {
+        return subject;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public String getTime() {

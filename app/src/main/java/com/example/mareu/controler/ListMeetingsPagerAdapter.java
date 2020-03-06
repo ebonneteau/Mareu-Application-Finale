@@ -5,9 +5,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 
-public class ListAttendeesPagerAdapter extends FragmentPagerAdapter {
+public class ListMeetingsPagerAdapter extends FragmentPagerAdapter {
 
-    ListAttendeesPagerAdapter(FragmentManager fm) {
+    ListMeetingsPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
@@ -18,7 +18,7 @@ public class ListAttendeesPagerAdapter extends FragmentPagerAdapter {
      */
     @Override
     public int getCount() {
-        return 1;
+        return 2;
     }
 
     /**
@@ -29,9 +29,16 @@ public class ListAttendeesPagerAdapter extends FragmentPagerAdapter {
      */
     @Override
     public Fragment getItem(int position) {
+        if (position == 0){
+            return MeetingsFragment.newInstance(0);
+        }
+        if (position == 1){
+            return PlacesFragment.newInstance(1);
+        }
+        else {
+            return null;
+        }
 
-
-            return AttendeesFragment.newInstance(1);
 
     }
 }

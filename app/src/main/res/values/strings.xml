@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Ma reu</string>
+    <string name="tab_meetings_title">meetings</string>
+    <string name="tab_places_title">places</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_attendee_details">AttendeeDetailsActivity</string>
     <string name="large_text">
@@ -91,4 +93,9 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="meeting_object">Meeting object</string>
+    <string name="meeting_end_time">Meeting end Time</string>
+    <string name="meeting_start_time">Meeting Start Time</string>
+    <string name="attendee_mail_address">Attendee mail address</string>
+    <string name="validate">validate</string>
 </resources>

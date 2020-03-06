@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import android.os.Bundle;
@@ -36,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
     //Adding FloatingActionButton
     @BindView(R.id.add_meeting)
     FloatingActionButton mFloatingActionButton;
-    ListAttendeesPagerAdapter mPagerAdapter;
+    ListMeetingsPagerAdapter mPagerAdapter;
+
 
 
     @Override
@@ -46,9 +46,10 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
 
-        mPagerAdapter = new ListAttendeesPagerAdapter(getSupportFragmentManager());
+        mPagerAdapter = new ListMeetingsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+        mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
         //FloatingActionButton fab = findViewById(R.id.fab);
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {

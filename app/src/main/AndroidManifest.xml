@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".controler.AttendeeDetailsActivity"
+            android:name=".controler.MeetingDetailsActivity"
             android:label="@string/title_activity_attendee_details"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".controler.BookingActivity" />

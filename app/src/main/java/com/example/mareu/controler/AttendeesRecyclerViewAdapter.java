@@ -1,101 +1,62 @@
 package com.example.mareu.controler;
 
-
-import android.content.Intent;
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.example.mareu.DI.DI;
 import com.example.mareu.R;
-import com.example.mareu.events.DeleteAttendeesEvent;
 import com.example.mareu.model.Attendees;
-import com.example.mareu.service.ReuApiService;
 
-
-import org.greenrobot.eventbus.EventBus;
-import org.jetbrains.annotations.NotNull;
-
+import java.util.LinkedList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
-
-
-
-public class AttendeesRecyclerViewAdapter extends RecyclerView.Adapter<AttendeesRecyclerViewAdapter.ViewHolder> {
+public class AttendeesRecyclerViewAdapter extends RecyclerView.Adapter<AttendeesRecyclerViewAdapter.AttendeesViewHolder> {
 
     private final List<Attendees> mAttendees;
-    private ReuApiService mApiService;
+    private LayoutInflater mInflater;
+    private static final String TAG = "RecyclerAttendee";
 
-
-    AttendeesRecyclerViewAdapter(List<Attendees> items) {
-        mAttendees = items;
+    public AttendeesRecyclerViewAdapter(Context context, List<Attendees> attendees ) {
+        mInflater = LayoutInflater.from(context);
+        this.mAttendees = attendees;
     }
 
-    @NotNull
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AttendeesRecyclerViewAdapter.AttendeesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View mItemView = mInflater.inflate(R.layout.attendee_item_list, parent, false);
+        return new AttendeesViewHolder (mItemView, this);
 
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_attendees, parent, false);
-        return new ViewHolder(view);
     }
 
-
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AttendeesViewHolder holder, int position) {
         Attendees attendees = mAttendees.get(position);
-        holder.mAttendeesName.setText(attendees.getPlace());
-        Glide.with(holder.mAttendeesName.getContext())
-              .load(R.drawable.ic_launcher_foreground)
-              .apply(RequestOptions.circleCropTransform())
-              .into(holder.mFakeImage);
+        holder.mAttendeesListView.setText(attendees.getmailAddress());
 
-
-        holder.mDeleteButton.setOnClickListener(v -> {
-            mApiService = DI.getReuApiService();
-            EventBus.getDefault().post(new DeleteAttendeesEvent(attendees));
-
-        });
-
-        //method to view details on item click
-        holder.mAttendeesName.setOnClickListener(v -> {
-
-            Intent intent = new Intent(holder.mAttendeesName.getContext(), AttendeeDetailsActivity.class);
-
-            intent.putExtra("item_list_name", attendees.getName());
-            intent.putExtra("item_list_id", attendees.getId());
-
-            //Launch NeighborDetails activity
-            holder.mAttendeesName.getContext().startActivity(intent);
-        });
     }
 
     @Override
     public int getItemCount() {
+        Log.d(TAG, "Attendess list size"  +mAttendees.size() );
         return mAttendees.size();
+
     }
+    class AttendeesViewHolder extends RecyclerView.ViewHolder{
+        public final TextView mAttendeesListView;
+        final AttendeesRecyclerViewAdapter mAdapter;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        @BindView(R.id.item_list_name)
-        public TextView mAttendeesName;
-        @BindView(R.id.item_list_delete_button)
-        public ImageButton mDeleteButton;
-        @BindView(R.id.item_list_attendees)
-                public ImageView mFakeImage;
-
-        ViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        public AttendeesViewHolder(@NonNull View itemView,AttendeesRecyclerViewAdapter adapter ) {
+            super(itemView);
+            mAttendeesListView = itemView.findViewById(R.id.an_attendee);
+            this.mAdapter = adapter;
         }
     }
 }

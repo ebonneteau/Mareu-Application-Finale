@@ -1,7 +1,7 @@
 package com.example.mareu.events;
 
-import com.example.mareu.model.Attendees;
 
+import com.example.mareu.model.Attendees;
 
 /**
  * Event fired when a user deletes a Neighbour
