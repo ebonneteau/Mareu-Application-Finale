@@ -65,7 +65,7 @@ public class PlacesFragment extends Fragment {
     }
 
     /**
-     * Init the List of neighbours
+     * Init the List of places
      */
     private void initList() {
 

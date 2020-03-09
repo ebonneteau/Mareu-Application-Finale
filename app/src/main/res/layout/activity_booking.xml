@@ -45,10 +45,11 @@
 
     </TextView>
 
-    <Spinner
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/meeting_room"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:isScrollContainer="true"
+        android:layout_height="170dp"
 
         />
 
@@ -68,7 +69,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/attendees_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="170dp"
         android:isScrollContainer="true">
 
 

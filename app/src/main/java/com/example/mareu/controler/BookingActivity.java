@@ -13,13 +13,17 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.mareu.R;
 import com.example.mareu.model.Attendees;
+import com.example.mareu.model.Places;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +49,13 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
     private EditText mAttendeeNameAdded;
     private RecyclerView mAttendeesRecyclerView;
     private List<Attendees> mAttendees = new ArrayList<>();
-    private AttendeesRecyclerViewAdapter mAdapter;
+    private AttendeesRecyclerViewAdapter mAttendeesRecyclerViewAdapter;
+    private List<Places> mBookingPlaces;
+    private RecyclerView mPlacesRecyclerView;
+    private BookingPlaceRecyclerViewAdapter mPlacesRecyclerViewAdapter;
+
+
+
     private static final String TAG = "BookingActivity";
 
 
@@ -59,18 +69,34 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         mMeetingObjectButton = findViewById(R.id.meeting_object);
         mAttendeeAddButton = findViewById(R.id.add_attendee_in_list);
         mAttendeeNameAdded = findViewById(R.id.attendees_added_name);
+        // Attendees RecyclerView
         // Get a handle to the RecyclerView.
         mAttendeesRecyclerView = findViewById(R.id.attendees_recycler_view);
         // Create an adapter and supply the data to be displayed.
-        mAdapter = new AttendeesRecyclerViewAdapter(this,mAttendees);
+        mAttendeesRecyclerViewAdapter = new AttendeesRecyclerViewAdapter(this,mAttendees);
         // Connect the adapter with the RecyclerView.
-        mAttendeesRecyclerView.setAdapter(mAdapter);
+        mAttendeesRecyclerView.setAdapter(mAttendeesRecyclerViewAdapter);
         // Give the RecyclerView a default layout manager.
         mAttendeesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // BackButton
         // Add back button with option requireNonNull
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mStartTimeButton = findViewById(R.id.clock_start_time);
+        //Places RecyclerView
+        // Get a handle to the Places RecyclerView.
+        mPlacesRecyclerView = findViewById(R.id.meeting_room);
+        // Create an adapter and supply the data to be displayed.
+        mPlacesRecyclerViewAdapter = new BookingPlaceRecyclerViewAdapter(this,mBookingPlaces);
+        // Connect the adapter with the RecyclerView.
+        mPlacesRecyclerView.setAdapter(mPlacesRecyclerViewAdapter);
+        // Give the RecyclerView a default layout manager.
+        mPlacesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+
+
 
         mStartTimeButton.setOnClickListener(view -> {
             //Set string value to check which TimePicker is opened
@@ -120,6 +146,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         });
     }
 
+
     //Method for home button
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -146,14 +173,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             mEndHour = Hour;
             mEndMinute = Minute;
 
-
         }
 
     }
-
-
-
-
-
-
 }
