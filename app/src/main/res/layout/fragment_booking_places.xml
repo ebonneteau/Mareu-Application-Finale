@@ -9,7 +9,7 @@
 
 
     <ImageView
-        android:id="@+id/item_list_meetings_place_holder"
+        android:id="@+id/item_list_places"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -18,37 +18,22 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+
+
+         />
+
+
 
     <TextView
-    android:id="@+id/item_list_place"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="24dp"
-    android:textStyle="bold"
-    app:layout_constraintBottom_toBottomOf="@+id/item_list_meetings_place_holder"
-    app:layout_constraintStart_toEndOf="@+id/item_list_meetings_place_holder"
-    app:layout_constraintTop_toTopOf="@+id/item_list_meetings_place_holder" />
-
-    <TextView
-        android:id="@+id/item_list_meeting_object"
+        android:id="@+id/item_list_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/item_list_place"
-        app:layout_constraintStart_toEndOf="@+id/item_list_place"
-        app:layout_constraintTop_toTopOf="@+id/item_list_place" />
-
-    <TextView
-        android:id="@+id/item_list_start_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/item_list_meeting_object"
-        app:layout_constraintStart_toEndOf="@+id/item_list_meeting_object"
-        app:layout_constraintTop_toTopOf="@+id/item_list_meeting_object" />
+        app:layout_constraintBottom_toBottomOf="@+id/item_list_places"
+        app:layout_constraintStart_toEndOf="@+id/item_list_places"
+        app:layout_constraintTop_toTopOf="@+id/item_list_places" />
 
     <ImageButton
         android:id="@+id/item_list_delete_button"

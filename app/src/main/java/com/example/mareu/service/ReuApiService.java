@@ -25,7 +25,7 @@ public interface ReuApiService {
     List<Places> getPlaces();
 
     List<Meetings> getMeetings();
-
+    List<Attendees> getAttendees();
 
 
 
@@ -35,6 +35,8 @@ public interface ReuApiService {
     void deleteAttendees(Attendees attendees);
 
     void deleteMeeting (Meetings meetings);
+
+    void addMeeting (Meetings meetings);
 
 
 

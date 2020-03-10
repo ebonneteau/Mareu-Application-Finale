@@ -12,38 +12,43 @@ public class Meetings {
     /** Identifier */
     private Integer id;
 
-    /** Full name */
-    private String subject;
+    /** Meeting object */
+    private String object;
 
-    /** Time */
-    private String time;
+    /** StartTime */
+    private String startTime;
+
+    /** EndTime */
+    private String endTime;
+
 
     /** Place */
     private String place;
-    private List<Attendees> attendees;
 
-    public Meetings(Integer id, String subject, String time, String place, List<Attendees> attendees) {
-        this.id = id;
-        this.subject = subject;
-        this.time = time;
-        this.place = place;
-        this.attendees = attendees;
-    }
+    /** Attendees */
+    private List<Attendees> attendees;
 
     /**
      * Constructor
      * @param id
-     * @param subject
-     * @param time
+     * @param object
+     * @param startTime
+     * @param endTime
      * @param place
+     * @param attendees
      */
-    public Meetings(Integer id, String subject, String time, String place ) {
+
+    public Meetings(Integer id, String object, String startTime,String endTime, String place, List<Attendees> attendees) {
         this.id = id;
-        this.subject = subject;
-        this.time = time;
+        this.object = object;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.place = place;
         this.attendees = new ArrayList<>();
     }
+
+
+
 
     public Integer getId() {
         return id;
@@ -53,20 +58,29 @@ public class Meetings {
         this.id = id;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getObject() {
+        return object;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setObject(String subject) {
+        this.object = subject;
     }
 
-    public String getTime() {
-        return time;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public String getEndTime() {
+        return endTime;
+    }
+
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public String getPlace() {

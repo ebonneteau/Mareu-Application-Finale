@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -21,9 +23,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.mareu.DI.DI;
 import com.example.mareu.R;
 import com.example.mareu.model.Attendees;
+import com.example.mareu.model.Meetings;
 import com.example.mareu.model.Places;
+import com.example.mareu.service.ReuApiService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +58,11 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
     private List<Places> mBookingPlaces;
     private RecyclerView mPlacesRecyclerView;
     private BookingPlaceRecyclerViewAdapter mPlacesRecyclerViewAdapter;
+    private ReuApiService mApiService;
+    private String mStartTime;
+    private String mEndTime;
+
+
 
 
 
@@ -94,10 +104,6 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         mPlacesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-
-
-
-
         mStartTimeButton.setOnClickListener(view -> {
             //Set string value to check which TimePicker is opened
             timeTag = "from";
@@ -121,27 +127,19 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             mValidationButton.setEnabled(true);
 
 
+
         } );
-        mMeetingObjectButton.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
 
 
-            }
-        });
         mValidationButton.setOnClickListener(view -> {
+            
             mMeetingObject = String.valueOf(mMeetingObjectButton.getText());
-            Log.d(TAG, "meeting object: " + mMeetingObject);
+            mApiService = DI.getReuApiService();
+            mApiService.addMeeting(new Meetings(1, mMeetingObject, mStartTime, mEndTime,null,mApiService.getAttendees() ));
+            Log.d(TAG, "meeting added: " + mApiService.getMeetings().size());
+
+
+            finish();
 
         });
     }
@@ -166,12 +164,14 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             mMeetingStartTime.setText("Meeting starts at: " + Hour + ":" + Minute);
             mStartHour = Hour;
             mStartMinute = Minute;
+            mStartTime = mStartHour + "h" + mStartMinute;
         }
         if (Objects.equals(timeTag, "to")) {
             mMeetingEndTime = findViewById(R.id.meeting_end_time);
             mMeetingEndTime.setText("Meeting ends at: " + Hour + ":" + Minute);
             mEndHour = Hour;
             mEndMinute = Minute;
+            mEndTime = mEndHour + "h" + mEndMinute;
 
         }
 

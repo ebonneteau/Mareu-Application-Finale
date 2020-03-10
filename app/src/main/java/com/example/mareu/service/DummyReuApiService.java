@@ -34,6 +34,10 @@ public class DummyReuApiService implements ReuApiService {
     public List<Meetings> getMeetings() {
         return meetingObject;
     }
+    @Override
+    public List<Attendees> getAttendees()  {
+        return attendeeObject;
+    }
 
 
     @Override
@@ -44,6 +48,11 @@ public class DummyReuApiService implements ReuApiService {
 
     @Override
     public void deleteMeeting(Meetings meetings) {
+
+    }
+    @Override
+    public void addMeeting(Meetings meetings) {
+        meetingObject.add(meetings);
 
     }
 

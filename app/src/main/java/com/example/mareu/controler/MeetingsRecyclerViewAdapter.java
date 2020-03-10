@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mareu.R;
 import com.example.mareu.model.Meetings;
+import com.example.mareu.service.ColorGenerator;
 import com.example.mareu.service.ReuApiService;
 
 
@@ -31,6 +32,7 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
 
     private final List<Meetings> mMeetings;
     private ReuApiService mApiService;
+    private ColorGenerator generator = ColorGenerator.MATERIAL;
 
 
     MeetingsRecyclerViewAdapter(List<Meetings> items) {
@@ -51,6 +53,15 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Meetings meetings = mMeetings.get(position);
         holder.mMeetingPlace.setText(meetings.getPlace());
+        holder.mMeetingObject.setText(meetings.getObject());
+        holder.mMeetingStartTime.setText(meetings.getStartTime());
+        Glide.with(holder.mPlaceHolder.getContext())
+        .load(R.drawable.ic_launcher_background)
+                .apply(RequestOptions.circleCropTransform())
+                .into(holder.mPlaceHolder);
+        //Generate random colors on placeHolder
+        holder.mPlaceHolder.setColorFilter(generator.getRandomColor());
+
 
 
 
@@ -80,12 +91,16 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.item_list_meetings)
+        @BindView(R.id.item_list_place)
         public TextView mMeetingPlace;
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
-        //@BindView(R.id.item_list_place)
-                //public ImageView mFakeImage;
+        @BindView(R.id.item_list_meetings_place_holder)
+        public ImageView mPlaceHolder;
+        @BindView(R.id.item_list_meeting_object)
+        public TextView mMeetingObject;
+        @BindView(R.id.item_list_start_time)
+        public TextView mMeetingStartTime;
 
         ViewHolder(View view) {
             super(view);

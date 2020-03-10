@@ -88,6 +88,13 @@ public class MeetingsFragment extends Fragment {
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
+    @Override
+    public void onResume() {
+        // method to reload fragment each time user navigates on it
+        // //(...not really eventually cf.remove favorite from NeighborRecycler)
+        super.onResume();
+        initList();
+    }
 
     /**
      * Fired if the user clicks on a delete button
