@@ -2,6 +2,7 @@ package com.example.mareu.controler;
 
 
 import android.content.Intent;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +11,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+//import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mareu.R;
 import com.example.mareu.model.Places;
+import com.example.mareu.service.ColorGenerator;
 import com.example.mareu.service.ReuApiService;
 
 import org.jetbrains.annotations.NotNull;
+
 
 import java.util.List;
 
@@ -28,6 +33,8 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
 
     private final List<Places> mPlaces;
     private ReuApiService mApiService;
+    private ColorGenerator generator = ColorGenerator.MATERIAL;
+    ImageView mFakeImage;
 
 
     PlacesRecyclerViewAdapter(List<Places> items) {
@@ -39,7 +46,7 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_meetings, parent, false);
+                .inflate(R.layout.fragment_places, parent, false);
         return new ViewHolder(view);
     }
 
@@ -48,10 +55,17 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Places places = mPlaces.get(position);
         holder.mMeetingPlace.setText(places.getPlace());
-        //Glide.with(holder.mMeetingPlace.getContext())
-          //    .load(R.drawable.ic_launcher_foreground)
-          //    .apply(RequestOptions.circleCropTransform())
-          //    .into(holder.mFakeImage);
+
+
+
+        Glide.with(holder.mFakeImageHolder.getContext())
+         .load(R.drawable.ic_launcher_background)
+         .apply(RequestOptions.circleCropTransform())
+         .into(holder.mFakeImageHolder);
+        //Generate random colors on placeHolder
+        holder.mFakeImageHolder.setColorFilter(generator.getRandomColor());
+
+
 
 
         holder.mDeleteButton.setOnClickListener(v -> {
@@ -79,13 +93,13 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
+        @BindView(R.id.item_list_places)
+        public ImageView mFakeImageHolder;
         @BindView(R.id.item_list_place)
         public TextView mMeetingPlace;
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
-        //@BindView(R.id.item_list_place)
-        //        public ImageView mFakeImage;
+
 
         ViewHolder(View view) {
             super(view);

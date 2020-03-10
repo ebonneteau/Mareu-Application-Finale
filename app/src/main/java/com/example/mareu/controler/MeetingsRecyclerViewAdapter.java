@@ -51,10 +51,7 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Meetings meetings = mMeetings.get(position);
         holder.mMeetingPlace.setText(meetings.getPlace());
-        Glide.with(holder.mMeetingPlace.getContext())
-              .load(R.drawable.ic_launcher_foreground)
-              .apply(RequestOptions.circleCropTransform())
-              .into(holder.mFakeImage);
+
 
 
         holder.mDeleteButton.setOnClickListener(v -> {
@@ -87,8 +84,8 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
         public TextView mMeetingPlace;
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
-        @BindView(R.id.item_list_place)
-                public ImageView mFakeImage;
+        //@BindView(R.id.item_list_place)
+                //public ImageView mFakeImage;
 
         ViewHolder(View view) {
             super(view);
