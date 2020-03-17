@@ -98,4 +98,5 @@
     <string name="meeting_start_time">Meeting Start Time</string>
     <string name="attendee_mail_address">Attendee mail address</string>
     <string name="validate">validate</string>
+    <string name="change_end_time">change this time</string>
 </resources>

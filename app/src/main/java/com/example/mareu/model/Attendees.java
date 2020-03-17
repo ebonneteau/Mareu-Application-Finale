@@ -37,7 +37,7 @@ public class Attendees {
         this.id = id;
     }
 
-    public String getmailAddress() {
+    public String getMailAddress() {
         return mailAddress;
     }
 

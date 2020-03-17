@@ -77,7 +77,6 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
         holder.mMeetingPlace.setOnClickListener(v -> {
 
             Intent intent = new Intent(holder.mMeetingPlace.getContext(), MeetingDetailsActivity.class);
-
             intent.putExtra("item_meeting_place", places.getPlace());
 
 

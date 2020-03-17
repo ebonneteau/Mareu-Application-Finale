@@ -57,7 +57,8 @@ public class DummyReuApiService implements ReuApiService {
     }
 
     @Override
-    public void addAttendees() {
+    public void addAttendees(Attendees attendees) {
+        attendeeObject.add(attendees);
 
     }
 

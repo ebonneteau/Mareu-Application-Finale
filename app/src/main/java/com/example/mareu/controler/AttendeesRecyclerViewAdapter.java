@@ -1,6 +1,5 @@
 package com.example.mareu.controler;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import com.example.mareu.R;
 import com.example.mareu.model.Attendees;
 
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -39,7 +37,7 @@ public class AttendeesRecyclerViewAdapter extends RecyclerView.Adapter<Attendees
     @Override
     public void onBindViewHolder(@NonNull AttendeesViewHolder holder, int position) {
         Attendees attendees = mAttendees.get(position);
-        holder.mAttendeesListView.setText(attendees.getmailAddress());
+        holder.mAttendeesListView.setText(attendees.getMailAddress());
 
     }
 

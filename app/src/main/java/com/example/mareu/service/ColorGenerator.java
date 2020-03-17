@@ -9,6 +9,7 @@ public class ColorGenerator {
 
     public static ColorGenerator MATERIAL;
 
+
     static {
         DEFAULT = create(Arrays.asList(
                 0xfff16364,
@@ -61,4 +62,5 @@ public class ColorGenerator {
     public int getColor(Object key) {
         return mColors.get(Math.abs(key.hashCode()) % mColors.size());
     }
+
 }

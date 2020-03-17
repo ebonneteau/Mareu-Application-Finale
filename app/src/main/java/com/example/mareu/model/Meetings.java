@@ -3,6 +3,7 @@ package com.example.mareu.model;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -74,6 +75,9 @@ public class Meetings {
         return endTime;
     }
 
+    public List<Attendees> getAttendees() {
+        return  attendees;
+    }
 
     public void setStartTime(String startTime) {
         this.startTime = startTime;
@@ -95,8 +99,8 @@ public class Meetings {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Meetings attendees = (Meetings) o;
-        return Objects.equals(id, attendees.id);
+        Meetings meetings = (Meetings) o;
+        return Objects.equals(id, meetings.id);
     }
 
     @Override

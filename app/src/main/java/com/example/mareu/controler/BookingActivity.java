@@ -2,26 +2,22 @@ package com.example.mareu.controler;
 
 
 import android.app.TimePickerDialog;
+import android.content.ClipData;
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
+import java.time.*;
 
 import com.example.mareu.DI.DI;
 import com.example.mareu.R;
@@ -30,8 +26,11 @@ import com.example.mareu.model.Meetings;
 import com.example.mareu.model.Places;
 import com.example.mareu.service.ReuApiService;
 
+import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 
@@ -61,9 +60,9 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
     private ReuApiService mApiService;
     private String mStartTime;
     private String mEndTime;
+    private String mSelectedPlace;
 
-
-
+    //private Spinner mPlacesSpinner;
 
 
     private static final String TAG = "BookingActivity";
@@ -83,7 +82,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         // Get a handle to the RecyclerView.
         mAttendeesRecyclerView = findViewById(R.id.attendees_recycler_view);
         // Create an adapter and supply the data to be displayed.
-        mAttendeesRecyclerViewAdapter = new AttendeesRecyclerViewAdapter(this,mAttendees);
+        mAttendeesRecyclerViewAdapter = new AttendeesRecyclerViewAdapter(this, mAttendees);
         // Connect the adapter with the RecyclerView.
         mAttendeesRecyclerView.setAdapter(mAttendeesRecyclerViewAdapter);
         // Give the RecyclerView a default layout manager.
@@ -93,15 +92,29 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mStartTimeButton = findViewById(R.id.clock_start_time);
-        //Places RecyclerView
+        // Places RecyclerView
         // Get a handle to the Places RecyclerView.
         mPlacesRecyclerView = findViewById(R.id.meeting_room);
         // Create an adapter and supply the data to be displayed.
-        mPlacesRecyclerViewAdapter = new BookingPlaceRecyclerViewAdapter(this,mBookingPlaces);
+        mPlacesRecyclerViewAdapter = new BookingPlaceRecyclerViewAdapter(this, mBookingPlaces,
+                places -> {
+                    mSelectedPlace = places.getPlace();
+                    Log.d(TAG, "ClickedValue is:" + mSelectedPlace);
+
+                });
         // Connect the adapter with the RecyclerView.
         mPlacesRecyclerView.setAdapter(mPlacesRecyclerViewAdapter);
         // Give the RecyclerView a default layout manager.
         mPlacesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //mPlacesRecyclerView.setOnClickListener(view -> {
+        //mSelectedPlace = mPlacesRecyclerView.getClass().getName();
+        //    Log.d(TAG, "ClickedValue is:"+ mSelectedPlace);
+
+        //});
+
+        //mPlacesSpinner = findViewById(R.id.room_spinner_list_view);
+        //mPlacesSpinner.setOnItemSelectedListener(new );
+        //mPlacesSpinner.setAdapter(new SimpleAdapter(this, mBookingPlaces));
 
 
         mStartTimeButton.setOnClickListener(view -> {
@@ -120,23 +133,40 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         mAttendeeAddButton.setOnClickListener(view -> {
 
             String emailAddress = mAttendeeNameAdded.getText().toString();
-            Attendees attendees = new Attendees(null, emailAddress);
+            Attendees attendees = new Attendees(mAttendees.size(), emailAddress);
+            //mApiService = DI.getReuApiService();
             mAttendees.add(attendees);
+            //mApiService.addAttendees(new Attendees(null,emailAddress));
+            Log.d(TAG, "mAttendees size: "+ mAttendees.size());
             Objects.requireNonNull(mAttendeesRecyclerView.getAdapter()).notifyDataSetChanged();
             //Reactivate validate button
             mValidationButton.setEnabled(true);
 
 
 
-        } );
+        });
 
 
         mValidationButton.setOnClickListener(view -> {
-            
+
             mMeetingObject = String.valueOf(mMeetingObjectButton.getText());
             mApiService = DI.getReuApiService();
-            mApiService.addMeeting(new Meetings(1, mMeetingObject, mStartTime, mEndTime,null,mApiService.getAttendees() ));
-            Log.d(TAG, "meeting added: " + mApiService.getMeetings().size());
+
+
+            //Meetings bookedMeetings  = new Meetings(null, mMeetingObject,mStartTime, mEndTime,mSelectedPlace,mAttendees);
+            //List<Attendees> mBookedAttendees = mAttendees.subList(0, mAttendees.size());
+            //mApiService.addMeeting(new Meetings(null , mMeetingObject, mStartTime, mEndTime, mSelectedPlace,mBookedAttendees));
+            //mApiService.addMeeting(new Meetings(null , mMeetingObject, mStartTime, mEndTime, mSelectedPlace,mAttendees.subList(0,mAttendees.size()-1)));
+            mApiService.addMeeting(new Meetings(mApiService.getMeetings().size() , mMeetingObject, mStartTime, mEndTime, mSelectedPlace, mAttendees));
+            Log.d(TAG, "meeting size: " + mApiService.getMeetings().size());
+            Log.d(TAG, "mAttendees List size is: "  + mAttendees.size());
+            //Log.d(TAG, "mBookedAttendees List size is: "  + mBookedAttendees.size());
+            Log.d(TAG, "mdAttendees Value is: "  + mAttendees);
+            Log.d(TAG, "mAttendees List size from id 0 to list size VALUE: "  + (mAttendees.subList(0,mAttendees.size()).addAll(mAttendees)));
+
+            Log.d(TAG, "mApiService.getAttendees().size() is: "  + mApiService.getAttendees().size());
+
+            Log.d(TAG, "start time vale is: " + mStartTime);
 
 
             finish();
@@ -161,19 +191,62 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
     public void onTimeSet(TimePicker startTimePicker, int Hour, int Minute) {
         if (Objects.equals(timeTag, "from")) {
             mMeetingStartTime = findViewById(R.id.meeting_start_time);
-            mMeetingStartTime.setText("Meeting starts at: " + Hour + ":" + Minute);
+            //Always set time as a String with 2 digits number format
+            mMeetingStartTime.setText(new StringBuilder().append("Meeting starts at: ")
+                    .append(String.format(Locale.FRANCE, "%02d", Hour)).append(":")
+                    .append(String.format(Locale.FRANCE, "%02d", Minute)).toString());
             mStartHour = Hour;
             mStartMinute = Minute;
-            mStartTime = mStartHour + "h" + mStartMinute;
+            //Always set time as a String with 2 digits number format
+            mStartTime = String.format(Locale.FRANCE, "%02d", mStartHour)
+                    + "h" + String.format(Locale.FRANCE, "%02d", mStartMinute);
+            calculateMeetingEndTime();
+
         }
         if (Objects.equals(timeTag, "to")) {
             mMeetingEndTime = findViewById(R.id.meeting_end_time);
-            mMeetingEndTime.setText("Meeting ends at: " + Hour + ":" + Minute);
+            //Always set time as a String with 2 digits number format
+            mMeetingEndTime.setText(new StringBuilder().append("Meeting starts at: ")
+                    .append(String.format(Locale.FRANCE, "%02d", Hour)).append(":")
+                    .append(String.format(Locale.FRANCE, "%02d", Minute)).toString());
             mEndHour = Hour;
             mEndMinute = Minute;
-            mEndTime = mEndHour + "h" + mEndMinute;
+            //Always set time as a String with 2 digits number format
+            mEndTime = String.format(Locale.FRANCE, "%02d", mEndHour)
+                    + ("h") + (String.format(Locale.FRANCE, "%02d", mEndMinute));
 
         }
 
     }
+
+    public void calculateMeetingEndTime() {
+        if (mStartMinute + 45 > 60) {
+            mEndMinute = mStartMinute - 15;
+
+            mEndHour = mStartHour + 1;
+            mMeetingEndTime = findViewById(R.id.meeting_end_time);
+            mMeetingEndTime.setText(new StringBuilder().append("Meeting ends at: ")
+                    .append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
+                    .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString());
+
+        }
+        if (mStartMinute + 45 == 60) {
+            mEndMinute = 0;
+            mEndHour = mStartHour + 1;
+            mMeetingEndTime = findViewById(R.id.meeting_end_time);
+            mMeetingEndTime.setText(new StringBuilder().append("Meeting ends at: ")
+                    .append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
+                    .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString());
+        }
+        if (mStartMinute + 45 < 60) {
+            mEndMinute = mStartMinute + 45;
+            mEndHour = mStartHour;
+            mMeetingEndTime = findViewById(R.id.meeting_end_time);
+            mMeetingEndTime.setText(new StringBuilder().append("Meeting ends at: ")
+                    .append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
+                    .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString());
+        }
+    }
+
+
 }

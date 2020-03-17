@@ -41,7 +41,7 @@ public interface ReuApiService {
 
 
 
-    void addAttendees();
+    void addAttendees(Attendees attendees);
 
 
 }

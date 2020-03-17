@@ -1,26 +1,36 @@
 package com.example.mareu.controler;
 
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.renderscript.Sampler;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.mareu.DI.DI;
 import com.example.mareu.R;
+import com.example.mareu.model.Attendees;
 import com.example.mareu.model.Meetings;
 import com.example.mareu.service.ColorGenerator;
 import com.example.mareu.service.ReuApiService;
 
 
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,8 +41,10 @@ import butterknife.ButterKnife;
 public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRecyclerViewAdapter.ViewHolder> {
 
     private final List<Meetings> mMeetings;
+
     private ReuApiService mApiService;
     private ColorGenerator generator = ColorGenerator.MATERIAL;
+    private static final String TAG = "MeetingsRecyclerView";
 
 
     MeetingsRecyclerViewAdapter(List<Meetings> items) {
@@ -52,6 +64,7 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Meetings meetings = mMeetings.get(position);
+
         holder.mMeetingPlace.setText(meetings.getPlace());
         holder.mMeetingObject.setText(meetings.getObject());
         holder.mMeetingStartTime.setText(meetings.getStartTime());
@@ -61,6 +74,12 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
                 .into(holder.mPlaceHolder);
         //Generate random colors on placeHolder
         holder.mPlaceHolder.setColorFilter(generator.getRandomColor());
+        mApiService = DI.getReuApiService();
+        holder.mMeetingBookedAttendees.setText(new StringBuilder().append( meetings.getAttendees().toString()));
+        Log.d(TAG, "value of list" + meetings.getAttendees().size());
+
+
+        //holder.mMeetingBookedAttendees.setText("eric.bonneteau@gmail.com");
 
 
 
@@ -101,6 +120,8 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
         public TextView mMeetingObject;
         @BindView(R.id.item_list_start_time)
         public TextView mMeetingStartTime;
+        @BindView(R.id.item_list_booked_attendees)
+        public TextView mMeetingBookedAttendees;
 
         ViewHolder(View view) {
             super(view);
