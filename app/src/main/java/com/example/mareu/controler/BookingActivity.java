@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -49,7 +50,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
     private EditText mMeetingObjectButton;
     private String mMeetingObject;
     private Button mValidationButton;
-    private FloatingActionButton mAttendeeAddButton;
+    private ImageView mAttendeeAddButton;
     private EditText mAttendeeNameAdded;
     private RecyclerView mAttendeesRecyclerView;
     private List<Attendees> mAttendees = new ArrayList<>();
@@ -152,17 +153,18 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             mMeetingObject = String.valueOf(mMeetingObjectButton.getText());
             mApiService = DI.getReuApiService();
 
-
             //Meetings bookedMeetings  = new Meetings(null, mMeetingObject,mStartTime, mEndTime,mSelectedPlace,mAttendees);
             //List<Attendees> mBookedAttendees = mAttendees.subList(0, mAttendees.size());
             //mApiService.addMeeting(new Meetings(null , mMeetingObject, mStartTime, mEndTime, mSelectedPlace,mBookedAttendees));
             //mApiService.addMeeting(new Meetings(null , mMeetingObject, mStartTime, mEndTime, mSelectedPlace,mAttendees.subList(0,mAttendees.size()-1)));
-            mApiService.addMeeting(new Meetings(mApiService.getMeetings().size() , mMeetingObject, mStartTime, mEndTime, mSelectedPlace, mAttendees));
+            //mApiService.addMeeting(new Meetings(mApiService.getMeetings().size() , mMeetingObject, mStartTime, mEndTime, mSelectedPlace, mAttendees));
+            mApiService.addMeeting(new Meetings(mApiService.getMeetings().size() ,
+                    mMeetingObject, mStartTime, mEndTime, mSelectedPlace, mAttendees));
             Log.d(TAG, "meeting size: " + mApiService.getMeetings().size());
             Log.d(TAG, "mAttendees List size is: "  + mAttendees.size());
             //Log.d(TAG, "mBookedAttendees List size is: "  + mBookedAttendees.size());
             Log.d(TAG, "mdAttendees Value is: "  + mAttendees);
-            Log.d(TAG, "mAttendees List size from id 0 to list size VALUE: "  + (mAttendees.subList(0,mAttendees.size()).addAll(mAttendees)));
+            //Log.d(TAG, "mAttendees List size from id 0 to list size VALUE: "  + (mAttendees.subList(0,mAttendees.size()).addAll(mAttendees)));
 
             Log.d(TAG, "mApiService.getAttendees().size() is: "  + mApiService.getAttendees().size());
 
@@ -246,6 +248,9 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
                     .append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
                     .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString());
         }
+    }
+    public  Attendees addAttendeesInMeetingList(){
+        return (Attendees) mAttendees.subList(0,mAttendees.size());
     }
 
 

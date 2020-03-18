@@ -32,6 +32,11 @@ public class Attendees {
     public Integer getId() {
         return id;
     }
+    //Added method to display list of list
+    @Override
+    public String toString() {
+        return mailAddress;
+    }
 
     public void setId(Integer id) {
         this.id = id;

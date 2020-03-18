@@ -75,7 +75,15 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
         //Generate random colors on placeHolder
         holder.mPlaceHolder.setColorFilter(generator.getRandomColor());
         mApiService = DI.getReuApiService();
-        holder.mMeetingBookedAttendees.setText(new StringBuilder().append( meetings.getAttendees().toString()));
+        
+        String attendeesLookInList = "";
+        for (Attendees a : meetings.getAttendees()){
+            if (meetings.getAttendees().indexOf(a) != 0){
+                attendeesLookInList += " , " ;
+            }
+            attendeesLookInList += a.getMailAddress();
+        }
+        holder.mMeetingBookedAttendees.setText(attendeesLookInList);
         Log.d(TAG, "value of list" + meetings.getAttendees().size());
 
 

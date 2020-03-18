@@ -45,7 +45,7 @@ public class Meetings {
         this.startTime = startTime;
         this.endTime = endTime;
         this.place = place;
-        this.attendees = new ArrayList<>();
+        this.attendees =  attendees;
     }
 
 
