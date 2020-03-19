@@ -1,4 +1,4 @@
-package com.example.mareu.controler;
+package com.example.mareu.controller;
 
 
 import android.content.Intent;

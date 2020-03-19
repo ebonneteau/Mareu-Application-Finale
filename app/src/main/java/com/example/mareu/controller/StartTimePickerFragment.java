@@ -1,4 +1,4 @@
-package com.example.mareu.controler;
+package com.example.mareu.controller;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -7,10 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
-import android.widget.TextView;
-import android.widget.TimePicker;
-
-import com.example.mareu.R;
 
 import java.util.Calendar;
 

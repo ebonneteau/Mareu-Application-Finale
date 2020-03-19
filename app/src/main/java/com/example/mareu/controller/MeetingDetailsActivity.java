@@ -1,4 +1,4 @@
-package com.example.mareu.controler;
+package com.example.mareu.controller;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;

@@ -1,4 +1,4 @@
-package com.example.mareu.controler;
+package com.example.mareu.controller;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

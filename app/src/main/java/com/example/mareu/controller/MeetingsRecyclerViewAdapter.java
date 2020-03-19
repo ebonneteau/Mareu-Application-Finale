@@ -1,9 +1,7 @@
-package com.example.mareu.controler;
+package com.example.mareu.controller;
 
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.renderscript.Sampler;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -25,12 +22,8 @@ import com.example.mareu.service.ReuApiService;
 
 
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -75,13 +68,13 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
         //Generate random colors on placeHolder
         holder.mPlaceHolder.setColorFilter(generator.getRandomColor());
         mApiService = DI.getReuApiService();
-        
+        //Create a separator between 2 attendees
         String attendeesLookInList = "";
-        for (Attendees a : meetings.getAttendees()){
-            if (meetings.getAttendees().indexOf(a) != 0){
+        for (Attendees mBookedAttendees : meetings.getAttendees()){
+            if (meetings.getAttendees().indexOf(mBookedAttendees) != 0){
                 attendeesLookInList += " , " ;
             }
-            attendeesLookInList += a.getMailAddress();
+            attendeesLookInList += mBookedAttendees.getMailAddress();
         }
         holder.mMeetingBookedAttendees.setText(attendeesLookInList);
         Log.d(TAG, "value of list" + meetings.getAttendees().size());

@@ -1,4 +1,4 @@
-package com.example.mareu.controler;
+package com.example.mareu.controller;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,8 +14,6 @@ import com.example.mareu.DI.DI;
 import com.example.mareu.R;
 import com.example.mareu.model.Places;
 import com.example.mareu.service.ReuApiService;
-
-import org.greenrobot.eventbus.EventBus;
 
 
 import java.util.List;
