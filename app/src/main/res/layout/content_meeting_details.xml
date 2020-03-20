@@ -22,6 +22,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginBottom="1dp"
+
             >
 
 
@@ -29,9 +30,13 @@
                 android:id="@+id/meeting_object"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:inputType="textCapSentences"
+                android:imeOptions="actionDone"
                 android:hint="@string/meeting_object"
                 android:textAlignment="center"
-                android:nextFocusDown="@id/clock_start_time"/>
+                android:nextFocusDown="@id/clock_start_time"
+
+                />
         </android.support.v7.widget.CardView>
 
 
@@ -175,9 +180,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:hint="@string/attendee_mail_address"
-                    android:importantForAutofill="yes"
-                    android:focusable="true"
                     android:fitsSystemWindows="true"
+                    android:inputType="textWebEmailAddress"
+                    android:imeOptions="actionDone"
+
                     />
             </LinearLayout>
             <ImageView
