@@ -35,7 +35,8 @@ public class BookingPlaceRecyclerViewAdapter extends RecyclerView.Adapter<Bookin
     @NonNull
     @Override
     public BookingPlaceRecyclerViewAdapter.PlacesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View mItemView = mInflater.inflate(R.layout.fragment_booking_place_list, parent, false);
+        View mItemView = mInflater.inflate(R.layout.fragment_booked_place_item, parent, false);
+
         return new PlacesViewHolder (mItemView, this);
 
     }

@@ -2,4 +2,23 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <!-- TextViews -->
+    <dimen name="size_title">13sp</dimen>
+    <dimen name="padding_title">40dp</dimen>
+    <!-- Buttons -->
+    <dimen name="size_button_text">10sp</dimen>
+    <dimen name="padding_button">8dp</dimen>
+    <!-- Recyclers -->
+    <dimen name="size_recycler_text">16sp</dimen>
+    <dimen name="padding_recycler">10dp</dimen>
+
+    <!--Clock Text Size -->
+    <dimen name="size_clock_text">14sp</dimen>
+    <!--Meeting Object Text Size -->
+    <dimen name="size_meeting_object_text">16sp</dimen>
+    <!--Card Title Text Size -->
+    <dimen name="size_card_title_text">14sp</dimen>
+    <!--Email textText Size -->
+    <dimen name="size_email_text">16sp</dimen>
+
 </resources>

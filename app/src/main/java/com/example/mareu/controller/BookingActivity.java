@@ -4,8 +4,10 @@ package com.example.mareu.controller;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -57,6 +59,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
     private RecyclerView mPlacesRecyclerView;
     private AttendeesRecyclerViewAdapter mAttendeesRecyclerViewAdapter;
     private BookingPlaceRecyclerViewAdapter mPlacesRecyclerViewAdapter;
+
 
     //Needed values for new meeting creation
     private String mMeetingObject;
@@ -114,7 +117,9 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         mAttendeesRecyclerView.setAdapter(mAttendeesRecyclerViewAdapter);
         // Give the RecyclerView a default layout manager.
         mAttendeesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //Attendees add button
+        // Add a divider
+        mAttendeesRecyclerView.addItemDecoration(new DividerItemDecoration(mAttendeesRecyclerView.getContext(),DividerItemDecoration.VERTICAL));
+        // Attendees add button
         mAttendeeAddButton.setOnClickListener(view -> {
 
             String emailAddress = mAttendeeNameAdded.getText().toString();
@@ -129,14 +134,19 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             //}
             //Clear Text
             mAttendeeNameAdded.getText().clear();
-            //Hide keyboard (replace mStartTimeButton by the object view used)
+
+            //Hide keyboard
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(mStartTimeButton.getWindowToken(), 0);
 
-            mValidationButton.setEnabled(true);
-            mValidationButton.setFocusable(true);
+            mValidationButton.getOnFocusChangeListener();
+
+            //mValidationButton.setFocusable(true);
+            mValidationButton.setVisibility(View.VISIBLE);
             mValidationButton.setFocusableInTouchMode(true);
-            mValidationButton.requestFocus(View.FOCUS_DOWN);
+            mValidationButton.requestFocus(View.KEEP_SCREEN_ON);
+            mValidationButton.setEnabled(true);
+
 
         });
 
@@ -153,7 +163,9 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         // Connect the adapter with the RecyclerView.
         mPlacesRecyclerView.setAdapter(mPlacesRecyclerViewAdapter);
         // Give the RecyclerView a default layout manager.
-        mPlacesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mPlacesRecyclerView.setLayoutManager(new LinearLayoutManager (this));
+        // Add a divider
+        mPlacesRecyclerView.addItemDecoration(new DividerItemDecoration(mPlacesRecyclerView.getContext(),DividerItemDecoration.VERTICAL));
 
         //***********
         //TimePickers
