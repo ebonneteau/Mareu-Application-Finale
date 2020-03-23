@@ -93,14 +93,14 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="meeting_object">Meeting object</string>
+    <string name="meeting_object">FILL MEETING OBJECT</string>
     <string name="meeting_end_time">Meeting end Time</string>
     <string name="meeting_start_time">Meeting Start Time</string>
     <string name="meeting_set_time">Set Start Time</string>
     <string name="attendee_mail_address">Attendee mail address</string>
-    <string name="validate">validate</string>
+    <string name="validate">VALIDATE</string>
     <string name="change_end_time">change this</string>
-    <string name="select_the_room">SELECT THE ROOM</string>
+    <string name="select_the_room">SELECT MEETING ROOM</string>
     <string name="add_attendees_text_card">ADD ATTENDEES</string>
     <string name="recycler_item_text">recycler_item_text</string>
 </resources>

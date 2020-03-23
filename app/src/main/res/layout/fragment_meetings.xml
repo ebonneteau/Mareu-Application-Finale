@@ -32,24 +32,25 @@
         app:layout_constraintTop_toTopOf="@+id/item_list_meetings_place_holder" />
 
     <TextView
-        android:id="@+id/item_list_place"
+        android:id="@+id/item_list_start_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/item_list_meeting_object"
         app:layout_constraintStart_toEndOf="@+id/item_list_meeting_object"
         app:layout_constraintTop_toTopOf="@+id/item_list_meeting_object" />
 
     <TextView
-        android:id="@+id/item_list_start_time"
+        android:id="@+id/item_list_place"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/item_list_place"
-        app:layout_constraintStart_toEndOf="@+id/item_list_place"
-        app:layout_constraintTop_toTopOf="@+id/item_list_place" />
+        app:layout_constraintBottom_toBottomOf="@+id/item_list_start_time"
+        app:layout_constraintStart_toEndOf="@+id/item_list_start_time"
+        app:layout_constraintTop_toTopOf="@+id/item_list_start_time" />
 
     <TextView
         android:id="@+id/item_list_booked_attendees"

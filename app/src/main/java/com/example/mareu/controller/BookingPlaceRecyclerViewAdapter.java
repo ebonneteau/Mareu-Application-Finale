@@ -46,11 +46,16 @@ public class BookingPlaceRecyclerViewAdapter extends RecyclerView.Adapter<Bookin
 
         Places places = mBookingPlaces.get(position);
         holder.mPlacesListView.setText(places.getPlace());
-        holder.mPlacesListView.setTextColor(generator.getRandomColor());
+        //holder.mPlacesListView.setTextColor(generator.getRandomColor());
         holder.itemView.setOnClickListener(view -> {
             mBookedRoom.onClick(places);
+            //change color on clicked item
+            holder.itemView.setBackgroundColor(view.getResources().getColor(R.color.button_pressed_false));
+
+
 
         });
+
 
     }
 

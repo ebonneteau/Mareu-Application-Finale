@@ -38,6 +38,7 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
     private ReuApiService mApiService;
     private ColorGenerator generator = ColorGenerator.MATERIAL;
     private static final String TAG = "MeetingsRecyclerView";
+    private String mMeetingObjectSeparator;
 
 
     MeetingsRecyclerViewAdapter(List<Meetings> items) {
@@ -59,8 +60,11 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
         Meetings meetings = mMeetings.get(position);
 
         holder.mMeetingPlace.setText(meetings.getPlace());
-        holder.mMeetingObject.setText(meetings.getObject());
-        holder.mMeetingStartTime.setText(meetings.getStartTime());
+        //Create the separator after mMeetingObject
+        holder.mMeetingObject.setText(new StringBuilder().append(meetings.getObject()).append(" - ").toString());
+        //Create the separator after mMeetingStartTime
+        holder.mMeetingStartTime.setText(new StringBuilder().append(meetings.getStartTime()).append(" - ").toString());
+
         Glide.with(holder.mPlaceHolder.getContext())
         .load(R.drawable.ic_launcher_background)
                 .apply(RequestOptions.circleCropTransform())
@@ -69,14 +73,14 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
         holder.mPlaceHolder.setColorFilter(generator.getRandomColor());
         mApiService = DI.getReuApiService();
         //Create a separator between 2 attendees
-        String attendeesLookInList = "";
+        StringBuilder attendeesLookInList = new StringBuilder();
         for (Attendees mBookedAttendees : meetings.getAttendees()){
             if (meetings.getAttendees().indexOf(mBookedAttendees) != 0){
-                attendeesLookInList += " , " ;
+                attendeesLookInList.append(" , ");
             }
-            attendeesLookInList += mBookedAttendees.getMailAddress();
+            attendeesLookInList.append(mBookedAttendees.getMailAddress());
         }
-        holder.mMeetingBookedAttendees.setText(attendeesLookInList);
+        holder.mMeetingBookedAttendees.setText(attendeesLookInList.toString());
         Log.d(TAG, "value of list" + meetings.getAttendees().size());
 
 

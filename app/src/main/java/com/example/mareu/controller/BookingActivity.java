@@ -108,6 +108,25 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         //Recyclers
         //*********
 
+
+
+        // Places RecyclerView
+        // Get a handle to the Places RecyclerView.
+        mPlacesRecyclerView = findViewById(R.id.meeting_room);
+        // Create an adapter and supply the data to be displayed.
+        mPlacesRecyclerViewAdapter = new BookingPlaceRecyclerViewAdapter(this, mBookingPlaces,
+                places -> {
+                    mSelectedPlace = places.getPlace();
+                    Log.d(TAG, "ClickedValue is:" + mSelectedPlace);
+
+                });
+        // Connect the adapter with the RecyclerView.
+        mPlacesRecyclerView.setAdapter(mPlacesRecyclerViewAdapter);
+        // Give the RecyclerView a default layout manager.
+        mPlacesRecyclerView.setLayoutManager(new LinearLayoutManager (this));
+        // Add a divider
+        mPlacesRecyclerView.addItemDecoration(new DividerItemDecoration(mPlacesRecyclerView.getContext(),DividerItemDecoration.VERTICAL));
+
         // Attendees RecyclerView
         // Get a handle to the RecyclerView.
         mAttendeesRecyclerView = findViewById(R.id.attendees_recycler_view);
@@ -149,24 +168,6 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
 
 
         });
-
-        // Places RecyclerView
-        // Get a handle to the Places RecyclerView.
-        mPlacesRecyclerView = findViewById(R.id.meeting_room);
-        // Create an adapter and supply the data to be displayed.
-        mPlacesRecyclerViewAdapter = new BookingPlaceRecyclerViewAdapter(this, mBookingPlaces,
-                places -> {
-                    mSelectedPlace = places.getPlace();
-                    Log.d(TAG, "ClickedValue is:" + mSelectedPlace);
-
-                });
-        // Connect the adapter with the RecyclerView.
-        mPlacesRecyclerView.setAdapter(mPlacesRecyclerViewAdapter);
-        // Give the RecyclerView a default layout manager.
-        mPlacesRecyclerView.setLayoutManager(new LinearLayoutManager (this));
-        // Add a divider
-        mPlacesRecyclerView.addItemDecoration(new DividerItemDecoration(mPlacesRecyclerView.getContext(),DividerItemDecoration.VERTICAL));
-
         //***********
         //TimePickers
         //***********
@@ -180,6 +181,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             timeTag = "from";
             DialogFragment startTimePicker = new StartTimePickerFragment();
             startTimePicker.show(getSupportFragmentManager(), "Start_Time_Picker");
+            mStartTimeButton.setText("CHANGE THIS");
         });
         //End timePicker
         mEndTimeButton = findViewById(R.id.clock_end_time);
@@ -193,7 +195,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             mMeetingObject = String.valueOf(mMeetingObjectInput.getText());
             mApiService = DI.getReuApiService();
             mApiService.addMeeting(new Meetings(mApiService.getMeetings().size(),
-                    mMeetingObject, mStartTime, mEndTime, mSelectedPlace, mAttendees));
+                    mMeetingObject , mStartTime , mEndTime, mSelectedPlace, mAttendees));
             finish();
         });
     }
