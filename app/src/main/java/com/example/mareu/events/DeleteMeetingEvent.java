@@ -4,7 +4,7 @@ package com.example.mareu.events;
 import com.example.mareu.model.Meetings;
 
 /**
- * Event fired when a user deletes a Neighbour
+ * Event fired when a user deletes a meeting
  */
 public class DeleteMeetingEvent {
 

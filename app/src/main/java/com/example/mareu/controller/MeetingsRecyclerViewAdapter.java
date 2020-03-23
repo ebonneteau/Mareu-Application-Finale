@@ -15,12 +15,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mareu.DI.DI;
 import com.example.mareu.R;
+import com.example.mareu.events.DeleteMeetingEvent;
 import com.example.mareu.model.Attendees;
 import com.example.mareu.model.Meetings;
 import com.example.mareu.service.ColorGenerator;
 import com.example.mareu.service.ReuApiService;
 
 
+import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -81,17 +83,10 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
             attendeesLookInList.append(mBookedAttendees.getMailAddress());
         }
         holder.mMeetingBookedAttendees.setText(attendeesLookInList.toString());
-        Log.d(TAG, "value of list" + meetings.getAttendees().size());
-
-
-        //holder.mMeetingBookedAttendees.setText("eric.bonneteau@gmail.com");
-
-
-
 
         holder.mDeleteButton.setOnClickListener(v -> {
-            //mApiService = DI.getReuApiService();
-            //EventBus.getDefault().post(new DeleteMeetingEvent(meetings));
+            mApiService = DI.getReuApiService();
+            EventBus.getDefault().post(new DeleteMeetingEvent(meetings));
 
         });
 

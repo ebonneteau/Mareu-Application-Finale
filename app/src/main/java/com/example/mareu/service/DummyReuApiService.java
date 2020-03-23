@@ -48,6 +48,7 @@ public class DummyReuApiService implements ReuApiService {
 
     @Override
     public void deleteMeeting(Meetings meetings) {
+        meetingObject.remove(meetings);
 
     }
     @Override
@@ -62,5 +63,9 @@ public class DummyReuApiService implements ReuApiService {
 
     }
 
+    @Override
+    public void deletePlace(Places places) {
+        placeObject.remove(places);
 
+    }
 }

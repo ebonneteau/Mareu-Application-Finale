@@ -13,7 +13,7 @@ import java.util.List;
 
 
 /**
- * Neighbour API client
+ * "Ma Réu" API client
  */
 public interface ReuApiService {
 
@@ -23,23 +23,20 @@ public interface ReuApiService {
      * @return {@link List}
      */
     List<Places> getPlaces();
-
     List<Meetings> getMeetings();
     List<Attendees> getAttendees();
 
 
-
     /**
-     * Deletes attendee
+     * Other actions
      */
     void deleteAttendees(Attendees attendees);
+
+    void deletePlace (Places places);
 
     void deleteMeeting (Meetings meetings);
 
     void addMeeting (Meetings meetings);
-
-
-
 
     void addAttendees(Attendees attendees);
 

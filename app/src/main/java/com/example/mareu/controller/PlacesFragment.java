@@ -12,9 +12,13 @@ import android.view.ViewGroup;
 
 import com.example.mareu.DI.DI;
 import com.example.mareu.R;
+import com.example.mareu.events.DeletePlaceEvent;
 import com.example.mareu.model.Places;
 import com.example.mareu.service.ReuApiService;
 
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 import java.util.Objects;
@@ -71,29 +75,29 @@ public class PlacesFragment extends Fragment {
         mRecyclerView.setAdapter(new PlacesRecyclerViewAdapter(mPlaces));
     }
 
-    //@Override
-    //public void onStart() {
-    //    super.onStart();
-    //    EventBus.getDefault().register(this);
-    //}
+    @Override
+    public void onStart() {
+        super.onStart();
+       EventBus.getDefault().register(this);
+    }
 
-    //@Override
-    //public void onStop() {
-    //    super.onStop();
-    //    EventBus.getDefault().unregister(this);
-    //}
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
 
     /**
      * Fired if the user clicks on a delete button
      *
      * @param event
      */
-    //@Subscribe
-    //public void onDeletePlace (DelePlaceEvent event) {
-    //  mApiService.deleteMeeting(event.place);
-    //  Objects.requireNonNull(mRecyclerView.getAdapter()).notifyDataSetChanged();
+    @Subscribe
+    public void onDeletePlace (DeletePlaceEvent event) {
+      mApiService.deletePlace(event.places);
+      Objects.requireNonNull(mRecyclerView.getAdapter()).notifyDataSetChanged();
 
-    //}
+    }
 
 
 }
