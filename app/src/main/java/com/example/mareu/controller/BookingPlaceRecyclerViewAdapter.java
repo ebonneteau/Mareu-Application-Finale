@@ -2,11 +2,13 @@ package com.example.mareu.controller;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mareu.DI.DI;
 import com.example.mareu.R;
@@ -25,6 +27,8 @@ public class BookingPlaceRecyclerViewAdapter extends RecyclerView.Adapter<Bookin
     private static final String TAG = "RecyclerPlaces";
     private ColorGenerator generator = ColorGenerator.MATERIAL;
     private OnSelectedBookedRoom mBookedRoom;
+    private int selected_position = -1;
+    private int old_position = -1;
 
     public BookingPlaceRecyclerViewAdapter(Context context, List<Places> places, OnSelectedBookedRoom bookedRoom ) {
         mInflater = LayoutInflater.from(context);
@@ -48,9 +52,40 @@ public class BookingPlaceRecyclerViewAdapter extends RecyclerView.Adapter<Bookin
         holder.mPlacesListView.setText(places.getPlace());
         //holder.mPlacesListView.setTextColor(generator.getRandomColor());
         holder.itemView.setOnClickListener(view -> {
-            mBookedRoom.onClick(places);
+
             //change color on clicked item
-            holder.itemView.setBackgroundColor(view.getResources().getColor(R.color.button_pressed_false));
+            if ((selected_position == -1)&& (old_position == -1)){
+                //notifyDataSetChanged();
+                holder.itemView.setBackgroundColor(view.getResources().getColor(R.color.button_pressed_false));
+                mBookedRoom.onClick(places);
+                Snackbar.make(view, "Confirmation: " + holder.mPlacesListView.getText() + " is booked !" , Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+                selected_position = position;
+                old_position = position;
+                return;
+
+            }
+            if (selected_position == position && old_position == position){
+                holder.itemView.setBackgroundColor(view.getResources().getColor(R.color.item_un_selected));
+                mBookedRoom.onClick(places);
+                Snackbar.make(view,  "Confirmation: " + holder.mPlacesListView.getText() + " is cancelled !", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+                old_position = -1;
+                selected_position = -1;
+                return;
+
+            }if (old_position != position && selected_position != position ){
+                notifyDataSetChanged();
+                mBookedRoom.onClick(places);
+                old_position = -1;
+                selected_position = -1;
+
+                Snackbar.make(view,  " PLEASE SELECT A ROOM", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+
 
 
 

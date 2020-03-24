@@ -40,6 +40,7 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
     ImageView mFakeImage;
 
 
+
     PlacesRecyclerViewAdapter(List<Places> items) {
         mPlaces = items;
     }

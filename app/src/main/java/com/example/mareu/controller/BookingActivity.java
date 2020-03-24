@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -65,11 +66,12 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
     private String mMeetingObject;
     private String mStartTime;
     private String mEndTime;
-    private String mSelectedPlace;
+    private String mSelectedPlace = null;
+    private String mPreviousSelectedPlace = null;
     private EditText mMeetingObjectInput;
     private EditText mAttendeeNameAdded;
     private List<Attendees> mAttendees = new ArrayList<>();
-    private List<Places> mBookingPlaces;
+    private List<Places> mBookingPlaces = new ArrayList<>();
 
     //Other
     private ReuApiService mApiService;
@@ -109,23 +111,38 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         //*********
 
 
-
         // Places RecyclerView
         // Get a handle to the Places RecyclerView.
         mPlacesRecyclerView = findViewById(R.id.meeting_room);
         // Create an adapter and supply the data to be displayed.
+        // Then match Value (or non value) with the recycler visual selection
         mPlacesRecyclerViewAdapter = new BookingPlaceRecyclerViewAdapter(this, mBookingPlaces,
                 places -> {
-                    mSelectedPlace = places.getPlace();
-                    Log.d(TAG, "ClickedValue is:" + mSelectedPlace);
 
+                    if (mPreviousSelectedPlace == null && mSelectedPlace == null) {
+                        mSelectedPlace = places.getPlace();
+                        mPreviousSelectedPlace = places.getPlace();
+                        Log.d(TAG, "ClickedValue is:" + mSelectedPlace);
+                        return;
+                    }
+                    if (Objects.requireNonNull(mPreviousSelectedPlace).equals(mSelectedPlace)) {
+                        mSelectedPlace = null;
+                        mPreviousSelectedPlace = null;
+                        Log.d(TAG, "ClickedValue is:" + mSelectedPlace);
+
+                    }
+                    if (mSelectedPlace != null && !mSelectedPlace.equals(mPreviousSelectedPlace)){
+                        mSelectedPlace = places.getPlace();
+                        mPreviousSelectedPlace = null;
+                        Log.d(TAG, "ClickedValue is:" + mSelectedPlace);
+                    }
                 });
         // Connect the adapter with the RecyclerView.
         mPlacesRecyclerView.setAdapter(mPlacesRecyclerViewAdapter);
         // Give the RecyclerView a default layout manager.
-        mPlacesRecyclerView.setLayoutManager(new LinearLayoutManager (this));
+        mPlacesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // Add a divider
-        mPlacesRecyclerView.addItemDecoration(new DividerItemDecoration(mPlacesRecyclerView.getContext(),DividerItemDecoration.VERTICAL));
+        mPlacesRecyclerView.addItemDecoration(new DividerItemDecoration(mPlacesRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
         // Attendees RecyclerView
         // Get a handle to the RecyclerView.
@@ -137,7 +154,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         // Give the RecyclerView a default layout manager.
         mAttendeesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // Add a divider
-        mAttendeesRecyclerView.addItemDecoration(new DividerItemDecoration(mAttendeesRecyclerView.getContext(),DividerItemDecoration.VERTICAL));
+        mAttendeesRecyclerView.addItemDecoration(new DividerItemDecoration(mAttendeesRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
         // Attendees add button
         mAttendeeAddButton.setOnClickListener(view -> {
 
@@ -195,7 +212,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             mMeetingObject = String.valueOf(mMeetingObjectInput.getText());
             mApiService = DI.getReuApiService();
             mApiService.addMeeting(new Meetings(mApiService.getMeetings().size(),
-                    mMeetingObject , mStartTime , mEndTime, mSelectedPlace, mAttendees));
+                    mMeetingObject, mStartTime, mEndTime, mSelectedPlace, mAttendees));
             finish();
         });
     }
@@ -213,6 +230,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         }
         return super.onOptionsItemSelected(item);
     }
+
     //Methods for timePickers
     @Override
     public void onTimeSet(TimePicker startTimePicker, int Hour, int Minute) {
@@ -242,6 +260,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
                     + ("h") + (String.format(Locale.FRANCE, "%02d", mEndMinute));
         }
     }
+
     //Calculet end time according to start time given
     public void calculateMeetingEndTime() {
         if (mStartMinute + 45 > 60) {
