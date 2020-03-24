@@ -101,6 +101,7 @@
     <string name="validate">VALIDATE</string>
     <string name="change_end_time">change this</string>
     <string name="select_the_room">SELECT MEETING ROOM</string>
+    <string name="select_the_time">SELECT MEETING START TIME</string>
     <string name="add_attendees_text_card">ADD ATTENDEES</string>
     <string name="recycler_item_text">recycler_item_text</string>
 </resources>
