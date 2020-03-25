@@ -1,4 +1,4 @@
-package com.example.mareu.controller;
+package com.example.mareu.controller.adapters;
 
 
 import android.content.Intent;
@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mareu.DI.DI;
 import com.example.mareu.R;
-import com.example.mareu.events.DeleteMeetingEvent;
+import com.example.mareu.controller.MeetingDetailsActivity;
 import com.example.mareu.events.DeletePlaceEvent;
 import com.example.mareu.model.Places;
 import com.example.mareu.service.ColorGenerator;
@@ -41,7 +41,7 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
 
 
 
-    PlacesRecyclerViewAdapter(List<Places> items) {
+    public PlacesRecyclerViewAdapter(List<Places> items) {
         mPlaces = items;
     }
 

@@ -1,4 +1,4 @@
-package com.example.mareu.controller;
+package com.example.mareu.controller.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.mareu.DI.DI;
 import com.example.mareu.R;
+import com.example.mareu.controller.adapters.MeetingsRecyclerViewAdapter;
 import com.example.mareu.events.DeleteMeetingEvent;
 import com.example.mareu.model.Meetings;
 import com.example.mareu.service.ReuApiService;

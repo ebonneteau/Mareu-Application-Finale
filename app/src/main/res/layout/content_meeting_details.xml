@@ -171,22 +171,19 @@
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
-            <android.support.v4.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+            android:layout_height="@dimen/recycler_view_layout_height"
+            android:layout_marginStart="@dimen/recycler_card_margin_left"
+            android:layout_marginEnd="@dimen/recycler_card_margin_right">
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/meeting_room"
                     android:layout_width="match_parent"
                     android:isScrollContainer="true"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:nextFocusDown="@+id/attendees_recycler_view"
 
                     />
-            </android.support.v4.widget.NestedScrollView>
+
 
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
@@ -250,28 +247,19 @@
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="@dimen/recycler_view_layout_height"
+            android:layout_marginStart="@dimen/recycler_card_margin_left"
+            android:layout_marginEnd="@dimen/recycler_card_margin_right">
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/attendees_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_vertical"
                 android:isScrollContainer="true"
-                android:nextFocusDown="@+id/validation_button">
+                android:nextFocusDown="@+id/validation_button"/>
 
 
-            </android.support.v7.widget.RecyclerView>
-
-
-
-
-        </android.support.v4.widget.NestedScrollView>
         </android.support.v7.widget.CardView>
         <Button
             android:id="@+id/validation_button"

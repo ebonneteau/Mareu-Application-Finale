@@ -1,4 +1,4 @@
-package com.example.mareu.controller;
+package com.example.mareu.controller.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mareu.DI.DI;
 import com.example.mareu.R;
@@ -51,6 +50,7 @@ public class BookingPlaceRecyclerViewAdapter extends RecyclerView.Adapter<Bookin
         Places places = mBookingPlaces.get(position);
         holder.mPlacesListView.setText(places.getPlace());
         //holder.mPlacesListView.setTextColor(generator.getRandomColor());
+        holder.itemView.setBackgroundColor(holder.itemView.getResources().getColor(R.color.item_un_selected));
         holder.itemView.setOnClickListener(view -> {
 
             //change color on clicked item
@@ -85,9 +85,6 @@ public class BookingPlaceRecyclerViewAdapter extends RecyclerView.Adapter<Bookin
                 Snackbar.make(view,  " PLEASE SELECT A ROOM", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-
-
-
 
         });
 

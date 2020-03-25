@@ -104,4 +104,5 @@
     <string name="select_the_time">SELECT MEETING START TIME</string>
     <string name="add_attendees_text_card">ADD ATTENDEES</string>
     <string name="recycler_item_text">recycler_item_text</string>
+    <string name="meeting_end_time_want_to_change">CHANGE THIS</string>
 </resources>

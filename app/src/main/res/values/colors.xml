@@ -8,5 +8,6 @@
     <color name="button_pressed_true">#A3A8B8</color>
     <color name="floattingActionButton_Tint">#EC2B32</color>
     <color name="item_un_selected">#FFFFFF</color>
+    <color name="delete_tint">#810303</color>
 
 </resources>

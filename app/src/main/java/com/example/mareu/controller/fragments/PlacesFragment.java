@@ -1,4 +1,4 @@
-package com.example.mareu.controller;
+package com.example.mareu.controller.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.mareu.DI.DI;
 import com.example.mareu.R;
+import com.example.mareu.controller.adapters.PlacesRecyclerViewAdapter;
 import com.example.mareu.events.DeletePlaceEvent;
 import com.example.mareu.model.Places;
 import com.example.mareu.service.ReuApiService;

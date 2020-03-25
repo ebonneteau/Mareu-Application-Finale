@@ -1,9 +1,8 @@
-package com.example.mareu.controller;
+package com.example.mareu.controller.adapters;
 
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mareu.DI.DI;
 import com.example.mareu.R;
+import com.example.mareu.controller.MeetingDetailsActivity;
 import com.example.mareu.events.DeleteMeetingEvent;
 import com.example.mareu.model.Attendees;
 import com.example.mareu.model.Meetings;
@@ -43,7 +43,7 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
     private String mMeetingObjectSeparator;
 
 
-    MeetingsRecyclerViewAdapter(List<Meetings> items) {
+    public MeetingsRecyclerViewAdapter(List<Meetings> items) {
         mMeetings = items;
     }
 

@@ -1,4 +1,4 @@
-package com.example.mareu.controller;
+package com.example.mareu.controller.fragments;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;

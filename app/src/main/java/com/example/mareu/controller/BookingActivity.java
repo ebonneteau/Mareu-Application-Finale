@@ -3,8 +3,6 @@ package com.example.mareu.controller;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
@@ -21,13 +19,16 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.mareu.DI.DI;
 import com.example.mareu.R;
+import com.example.mareu.controller.adapters.BookingAttendeeRecyclerViewAdapter;
+import com.example.mareu.controller.adapters.BookingPlaceRecyclerViewAdapter;
+import com.example.mareu.controller.fragments.EndTimePickerFragment;
+import com.example.mareu.controller.fragments.StartTimePickerFragment;
 import com.example.mareu.model.Attendees;
 import com.example.mareu.model.Meetings;
 import com.example.mareu.model.Places;
@@ -38,35 +39,50 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class BookingActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
-    // TimePickers values
+    // UI Components
+
+    @BindView(R.id.clock_start_time)
     Button mStartTimeButton;
+    @BindView(R.id.validation_button)
+    Button mValidationButton;
+    @BindView(R.id.clock_end_time)
     Button mEndTimeButton;
+    @BindView(R.id.add_attendee_in_list)
+    ImageView mAttendeeAddButton;
+    @BindView(R.id.meeting_start_time)
     TextView mMeetingStartTime;
+    @BindView(R.id.meeting_end_time)
     TextView mMeetingEndTime;
-    int mStartHour;
-    int mStartMinute;
-    int mEndHour;
-    int mEndMinute;
+    @BindView(R.id.booking_time_title)
+    TextView mBookingTimeTextView;
+    @BindView(R.id.card_booking_room_title)
+    TextView mBookingPlaceTextView;
+    @BindView(R.id.attendee_cardView)
+    TextView mBookingAttendeesTextView;
+    @BindView(R.id.meeting_object)
+    EditText mMeetingObjectInput;
+    @BindView(R.id.attendees_added_name)
+    EditText mAttendeeNameAdded;
 
-    //Other TextViews for focus
-    private TextView mBookingTimeTextView;
-    private TextView mBookingPlaceTextView;
-    private TextView mBookingAttendeesTextView;
+    // TimePickers values
 
-    //Time Tag String Value for TimePickers
+    private int mStartHour;
+    private int mStartMinute;
+    private int mEndHour;
+    private int mEndMinute;
     private String timeTag;
 
-    //Other UI components
-    private Button mValidationButton;
-    private ImageView mAttendeeAddButton;
 
     //Recyclers
     private RecyclerView mAttendeesRecyclerView;
     private RecyclerView mPlacesRecyclerView;
-    private AttendeesRecyclerViewAdapter mAttendeesRecyclerViewAdapter;
+    private BookingAttendeeRecyclerViewAdapter mBookingAttendeeRecyclerViewAdapter;
     private BookingPlaceRecyclerViewAdapter mPlacesRecyclerViewAdapter;
 
 
@@ -76,8 +92,6 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
     private String mEndTime;
     private String mSelectedPlace = null;
     private String mPreviousSelectedPlace = null;
-    private EditText mMeetingObjectInput;
-    private EditText mAttendeeNameAdded;
     private List<Attendees> mAttendees = new ArrayList<>();
     private List<Places> mBookingPlaces = new ArrayList<>();
 
@@ -90,6 +104,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
+        ButterKnife.bind(this);
 
         //soft input mode (manifest entry needed: android:windowSoftInputMode="adjustResize"
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
@@ -100,18 +115,6 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //**********************
-        //Connect other elements
-        //**********************
-
-        mMeetingObjectInput = findViewById(R.id.meeting_object);
-        mBookingTimeTextView = findViewById(R.id.booking_time_title);
-        mBookingPlaceTextView = findViewById(R.id.card_booking_room_title);
-        mBookingAttendeesTextView = findViewById(R.id.attendee_cardView);
-        mAttendeeAddButton = findViewById(R.id.add_attendee_in_list);
-        mAttendeeNameAdded = findViewById(R.id.attendees_added_name);
-        mStartTimeButton = findViewById(R.id.clock_start_time);
-        mValidationButton = findViewById(R.id.validation_button);
         //De activate Validation until one attendee is entered
         mValidationButton.setEnabled(false);
         //De activate add attendee button until one input field is filled
@@ -137,19 +140,19 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
                     if (mPreviousSelectedPlace == null && mSelectedPlace == null) {
                         mSelectedPlace = places.getPlace();
                         mPreviousSelectedPlace = places.getPlace();
-                        Log.d(TAG, "ClickedValue is:" + mSelectedPlace);
+
                         return;
                     }
                     if (Objects.requireNonNull(mPreviousSelectedPlace).equals(mSelectedPlace)) {
                         mSelectedPlace = null;
                         mPreviousSelectedPlace = null;
-                        Log.d(TAG, "ClickedValue is:" + mSelectedPlace);
+
 
                     }
-                    if (mSelectedPlace != null && !mSelectedPlace.equals(mPreviousSelectedPlace)) {
+                    if (mSelectedPlace != null) {
                         mSelectedPlace = places.getPlace();
                         mPreviousSelectedPlace = null;
-                        Log.d(TAG, "ClickedValue is:" + mSelectedPlace);
+
                     }
                 });
         // Connect the adapter with the RecyclerView.
@@ -162,6 +165,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         // **********************
         // Attendees RecyclerView
         // **********************
+
         //Activated Add attendees to list button on text input
         mAttendeeNameAdded.addTextChangedListener(new TextWatcher() {
             @Override
@@ -171,8 +175,8 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-            mAttendeeAddButton.setVisibility(View.VISIBLE);    
-            mAttendeeAddButton.setEnabled(s.toString().length() != 0);
+                mAttendeeAddButton.setVisibility(View.VISIBLE);
+                mAttendeeAddButton.setEnabled(s.toString().length() != 0);
             }
 
             @Override
@@ -183,9 +187,12 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         // Get a handle to the RecyclerView.
         mAttendeesRecyclerView = findViewById(R.id.attendees_recycler_view);
         // Create an adapter and supply the data to be displayed.
-        mAttendeesRecyclerViewAdapter = new AttendeesRecyclerViewAdapter(this, mAttendees);
+        mBookingAttendeeRecyclerViewAdapter = new BookingAttendeeRecyclerViewAdapter(this, mAttendees,
+                attendees -> mAttendees.remove(attendees));
+
+
         // Connect the adapter with the RecyclerView.
-        mAttendeesRecyclerView.setAdapter(mAttendeesRecyclerViewAdapter);
+        mAttendeesRecyclerView.setAdapter(mBookingAttendeeRecyclerViewAdapter);
         // Give the RecyclerView a default layout manager.
         mAttendeesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // Add a divider
@@ -222,19 +229,22 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         //Start timePicker
         mStartTimeButton.setOnClickListener(view -> {
             //Set string value to check which TimePicker is opened
+            timeTag = "from";
             //Hide keyboard
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(mStartTimeButton.getWindowToken(), 0);
-            timeTag = "from";
             DialogFragment startTimePicker = new StartTimePickerFragment();
             startTimePicker.show(getSupportFragmentManager(), "Start_Time_Picker");
-            mStartTimeButton.setText("CHANGE THIS");
+            mStartTimeButton.setText(R.string.meeting_end_time_want_to_change);
         });
         //End timePicker
-        mEndTimeButton = findViewById(R.id.clock_end_time);
+
         mEndTimeButton.setOnClickListener(view -> {
             //Set string value to check which TimePicker is opened
             timeTag = "to";
+            //Hide keyboard
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(mEndTimeButton.getWindowToken(), 0);
             DialogFragment endTimePicker = new EndTimePickerFragment();
             endTimePicker.show(getSupportFragmentManager(), "End_Time_Picker");
         });
@@ -296,7 +306,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
     @Override
     public void onTimeSet(TimePicker startTimePicker, int Hour, int Minute) {
         if (Objects.equals(timeTag, "from")) {
-            mMeetingStartTime = findViewById(R.id.meeting_start_time);
+
             //Always set time as a String with 2 digits number format
             mMeetingStartTime.setText(new StringBuilder().append("Meeting starts at: ")
                     .append(String.format(Locale.FRANCE, "%02d", Hour)).append(":")
@@ -309,7 +319,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             calculateMeetingEndTime();
         }
         if (Objects.equals(timeTag, "to")) {
-            mMeetingEndTime = findViewById(R.id.meeting_end_time);
+
             //Always set time as a String with 2 digits number format
             mMeetingEndTime.setText(new StringBuilder().append("Meeting starts at: ")
                     .append(String.format(Locale.FRANCE, "%02d", Hour)).append(":")
@@ -352,4 +362,18 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

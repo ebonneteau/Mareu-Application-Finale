@@ -25,9 +25,10 @@
         android:id="@+id/item_list_meeting_object"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="@dimen/meeting_text_margin_start"
+        android:textSize="@dimen/meeting_text_size"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/item_list_meetings_place_holder"
+        app:layout_constraintBottom_creator="@+id/item_list_meetings_place_holder"
         app:layout_constraintStart_toEndOf="@+id/item_list_meetings_place_holder"
         app:layout_constraintTop_toTopOf="@+id/item_list_meetings_place_holder" />
 
@@ -35,7 +36,7 @@
         android:id="@+id/item_list_start_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:textSize="@dimen/meeting_text_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/item_list_meeting_object"
         app:layout_constraintStart_toEndOf="@+id/item_list_meeting_object"
@@ -46,7 +47,7 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:textSize="@dimen/meeting_text_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/item_list_start_time"
         app:layout_constraintStart_toEndOf="@+id/item_list_start_time"
@@ -57,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="24dp"
-
+        android:textSize="@dimen/meeting_booked_attendees_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/parent_layout"
         app:layout_constraintStart_toEndOf="@+id/item_list_meetings_place_holder"
         app:layout_constraintTop_toBottomOf="@id/item_list_meeting_object"
@@ -69,10 +70,13 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/item_list_place"
+        app:layout_constraintBottom_toTopOf="@+id/item_list_booked_attendees"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/item_list_place"
-        app:srcCompat="@drawable/ic_delete" />
+
+        app:layout_constrainedHeight="false"
+        app:srcCompat="@drawable/ic_delete"
+
+        />
 
 
 </android.support.constraint.ConstraintLayout>

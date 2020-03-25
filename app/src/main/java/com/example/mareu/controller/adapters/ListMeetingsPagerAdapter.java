@@ -1,13 +1,16 @@
-package com.example.mareu.controller;
+package com.example.mareu.controller.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.mareu.controller.fragments.MeetingsFragment;
+import com.example.mareu.controller.fragments.PlacesFragment;
+
 
 public class ListMeetingsPagerAdapter extends FragmentPagerAdapter {
 
-    ListMeetingsPagerAdapter(FragmentManager fm) {
+    public ListMeetingsPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
