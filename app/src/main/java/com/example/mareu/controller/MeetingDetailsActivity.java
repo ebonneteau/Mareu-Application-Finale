@@ -20,22 +20,15 @@ public class MeetingDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting_details);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //etSupportActionBar(toolbar);
         // Add back button with option requireNonNull
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getIncomingIntent();
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_attendee_in_list);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
     }
 
     private void getIncomingIntent() {
@@ -59,8 +52,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         // In this case it is "Neighbour Detail"
         // This method displays any given value
         // instead of default title.
-        CollapsingToolbarLayout myTitleBar = findViewById(R.id.toolbar_layout);
-        myTitleBar.setTitle("Meeting room: " + selectedPlace);
+
 
     }
 

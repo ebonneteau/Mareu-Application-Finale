@@ -2,7 +2,7 @@
 <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_list_attendees"
+    android:id="@+id/fragment_item_list_attendees"
     android:name=".controller.meetings_list.PlacesFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"

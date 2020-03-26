@@ -79,15 +79,12 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
         });
 
         //method to view details on item click
-        holder.mMeetingPlace.setOnClickListener(v -> {
-
-            Intent intent = new Intent(holder.mMeetingPlace.getContext(), MeetingDetailsActivity.class);
-            intent.putExtra("item_meeting_place", places.getPlace());
-
-
-            //Launch MeetingDetails activity
-            holder.mMeetingPlace.getContext().startActivity(intent);
-        });
+        //holder.mMeetingPlace.setOnClickListener(v -> {
+        //    Intent intent = new Intent(holder.mMeetingPlace.getContext(), MeetingDetailsActivity.class);
+        //    intent.putExtra("item_meeting_place", places.getPlace());
+        //    //Launch MeetingDetails activity
+        //    holder.mMeetingPlace.getContext().startActivity(intent);
+        //});
     }
 
     @Override
@@ -98,7 +95,7 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_list_places)
         public ImageView mFakeImageHolder;
-        @BindView(R.id.item_list_place)
+        @BindView(R.id.textView_item_list_place)
         public TextView mMeetingPlace;
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;

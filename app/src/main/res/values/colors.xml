@@ -9,5 +9,7 @@
     <color name="floattingActionButton_Tint">#EC2B32</color>
     <color name="item_un_selected">#FFFFFF</color>
     <color name="delete_tint">#810303</color>
+    <color name="my_black">#070707</color>
+    <color name="my_red">#E60505</color>
 
 </resources>

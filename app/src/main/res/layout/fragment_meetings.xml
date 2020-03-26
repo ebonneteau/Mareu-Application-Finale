@@ -10,11 +10,11 @@
 
     <ImageView
         android:id="@+id/item_list_meetings_place_holder"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="@dimen/item_list_meetings_place_holder_width"
+        android:layout_height="@dimen/item_list_meetings_place_holder_height"
+        android:layout_marginStart="@dimen/item_list_meetings_place_holder_marginStart"
+        android:layout_marginTop="@dimen/item_list_meetings_place_holder_marginTop"
+        android:layout_marginBottom="@dimen/item_list_meetings_place_holder_marginBottom"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,9 +25,10 @@
         android:id="@+id/item_list_meeting_object"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/meeting_text_margin_start"
-        android:textSize="@dimen/meeting_text_size"
+        android:layout_marginStart="@dimen/textView_meeting_marginStart"
+        android:textSize="@dimen/textView_meeting_size"
         android:textStyle="bold"
+        android:textColor="@color/my_black"
         app:layout_constraintBottom_creator="@+id/item_list_meetings_place_holder"
         app:layout_constraintStart_toEndOf="@+id/item_list_meetings_place_holder"
         app:layout_constraintTop_toTopOf="@+id/item_list_meetings_place_holder" />
@@ -36,19 +37,21 @@
         android:id="@+id/item_list_start_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/meeting_text_size"
+        android:textSize="@dimen/textView_meeting_size"
         android:textStyle="bold"
+        android:textColor="@color/my_black"
         app:layout_constraintBottom_toBottomOf="@+id/item_list_meeting_object"
         app:layout_constraintStart_toEndOf="@+id/item_list_meeting_object"
         app:layout_constraintTop_toTopOf="@+id/item_list_meeting_object" />
 
     <TextView
-        android:id="@+id/item_list_place"
+        android:id="@+id/textView_item_list_place"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/meeting_text_size"
+        android:textSize="@dimen/textView_meeting_size"
         android:textStyle="bold"
+        android:textColor="@color/my_black"
         app:layout_constraintBottom_toBottomOf="@+id/item_list_start_time"
         app:layout_constraintStart_toEndOf="@+id/item_list_start_time"
         app:layout_constraintTop_toTopOf="@+id/item_list_start_time" />
@@ -58,8 +61,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="24dp"
-        android:textSize="@dimen/meeting_booked_attendees_text_size"
-        app:layout_constraintBottom_toBottomOf="@+id/parent_layout"
+        android:textSize="@dimen/textView_meeting_booked_attendees_size"
+        android:textColor="@color/my_black"
         app:layout_constraintStart_toEndOf="@+id/item_list_meetings_place_holder"
         app:layout_constraintTop_toBottomOf="@id/item_list_meeting_object"
          />
@@ -67,13 +70,12 @@
     <ImageButton
         android:id="@+id/item_list_delete_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/item_list_delete_button_marginEnd"
         android:background="@null"
-        app:layout_constraintBottom_toTopOf="@+id/item_list_booked_attendees"
+        app:layout_constraintBottom_toBottomOf="@+id/item_list_booked_attendees"
+        app:layout_constraintTop_toTopOf="@id/textView_item_list_place"
         app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constrainedHeight="false"
         app:srcCompat="@drawable/ic_delete"
 
         />

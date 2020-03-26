@@ -47,27 +47,27 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
 
     // UI Components
 
-    @BindView(R.id.clock_start_time)
+    @BindView(R.id.clock_start_time_button)
     Button mStartTimeButton;
-    @BindView(R.id.validation_button)
+    @BindView(R.id.button_validation)
     Button mValidationButton;
-    @BindView(R.id.clock_end_time)
+    @BindView(R.id.clock_end_time_button)
     Button mEndTimeButton;
-    @BindView(R.id.add_attendee_in_list)
+    @BindView(R.id.imageView_add_attendee_in_list)
     ImageView mAttendeeAddButton;
-    @BindView(R.id.meeting_start_time)
+    @BindView(R.id.meeting_start_time_textView)
     TextView mMeetingStartTime;
-    @BindView(R.id.meeting_end_time)
+    @BindView(R.id.meeting_end_time_text)
     TextView mMeetingEndTime;
     @BindView(R.id.booking_time_title)
     TextView mBookingTimeTextView;
     @BindView(R.id.card_booking_room_title)
     TextView mBookingPlaceTextView;
-    @BindView(R.id.attendee_cardView)
+    @BindView(R.id.cardView_attendee_title_container)
     TextView mBookingAttendeesTextView;
-    @BindView(R.id.meeting_object)
+    @BindView(R.id.editText_meeting_object)
     EditText mMeetingObjectInput;
-    @BindView(R.id.attendees_added_name)
+    @BindView(R.id.editText_attendees_added_name_input_text)
     EditText mAttendeeNameAdded;
 
     // TimePickers values
@@ -131,7 +131,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         // *******************
 
         // Get a handle to the Places RecyclerView.
-        mPlacesRecyclerView = findViewById(R.id.meeting_room);
+        mPlacesRecyclerView = findViewById(R.id.recycler_meeting_room);
         // Create an adapter and supply the data to be displayed.
         // Then match Value (or non value) with the recycler visual selection
         mPlacesRecyclerViewAdapter = new BookingPlaceRecyclerViewAdapter(this, mBookingPlaces,
@@ -185,7 +185,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             }
         });
         // Get a handle to the RecyclerView.
-        mAttendeesRecyclerView = findViewById(R.id.attendees_recycler_view);
+        mAttendeesRecyclerView = findViewById(R.id.recyclerView_attendees);
         // Create an adapter and supply the data to be displayed.
         mBookingAttendeeRecyclerViewAdapter = new BookingAttendeeRecyclerViewAdapter(this, mAttendees,
                 attendees -> mAttendees.remove(attendees));
@@ -208,16 +208,17 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             Objects.requireNonNull(mAttendeesRecyclerView.getAdapter()).notifyDataSetChanged();
             //Clear text
             mAttendeeNameAdded.getText().clear();
+            // Turn Hint text color to blue
+            mAttendeeNameAdded.setHintTextColor(getResources().getColor(R.color.myBlue));
             //Hide keyboard
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(mStartTimeButton.getWindowToken(), 0);
             //Activate and show Validation Button
-            //mValidationButton.getOnFocusChangeListener();
-
-            //mValidationButton.setFocusable(true);
+            mValidationButton.getOnFocusChangeListener();
+            mValidationButton.setFocusable(true);
             mValidationButton.setVisibility(View.VISIBLE);
-            //mValidationButton.setFocusableInTouchMode(true);
-            //mValidationButton.requestFocus(View.KEEP_SCREEN_ON);
+            mValidationButton.setFocusableInTouchMode(true);
+            mValidationButton.requestFocus(View.KEEP_SCREEN_ON);
             mValidationButton.setEnabled(true);
 
 
@@ -236,6 +237,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             DialogFragment startTimePicker = new StartTimePickerFragment();
             startTimePicker.show(getSupportFragmentManager(), "Start_Time_Picker");
             mStartTimeButton.setText(R.string.meeting_end_time_want_to_change);
+            mStartTimeButton.setTextColor(getResources().getColor(R.color.myBlue));
         });
         //End timePicker
 
@@ -338,7 +340,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             mEndMinute = mStartMinute - 15;
 
             mEndHour = mStartHour + 1;
-            mMeetingEndTime = findViewById(R.id.meeting_end_time);
+            mMeetingEndTime = findViewById(R.id.meeting_end_time_text);
             mMeetingEndTime.setText(new StringBuilder().append("Meeting ends at: ")
                     .append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
                     .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString());
@@ -347,7 +349,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         if (mStartMinute + 45 == 60) {
             mEndMinute = 0;
             mEndHour = mStartHour + 1;
-            mMeetingEndTime = findViewById(R.id.meeting_end_time);
+            mMeetingEndTime = findViewById(R.id.meeting_end_time_text);
             mMeetingEndTime.setText(new StringBuilder().append("Meeting ends at: ")
                     .append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
                     .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString());
@@ -355,7 +357,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         if (mStartMinute + 45 < 60) {
             mEndMinute = mStartMinute + 45;
             mEndHour = mStartHour;
-            mMeetingEndTime = findViewById(R.id.meeting_end_time);
+            mMeetingEndTime = findViewById(R.id.meeting_end_time_text);
             mMeetingEndTime.setText(new StringBuilder().append("Meeting ends at: ")
                     .append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
                     .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString());

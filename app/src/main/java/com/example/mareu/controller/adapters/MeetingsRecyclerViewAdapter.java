@@ -91,9 +91,9 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
         });
 
         //method to view details on item click
-        holder.mMeetingPlace.setOnClickListener(v -> {
+        holder.itemView.setOnClickListener(v -> {
 
-            Intent intent = new Intent(holder.mMeetingPlace.getContext(), MeetingDetailsActivity.class);
+            Intent intent = new Intent(holder.itemView.getContext(), MeetingDetailsActivity.class);
 
             intent.putExtra("item_meeting_place", meetings.getPlace());
 
@@ -110,7 +110,7 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.item_list_place)
+        @BindView(R.id.textView_item_list_place)
         public TextView mMeetingPlace;
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;

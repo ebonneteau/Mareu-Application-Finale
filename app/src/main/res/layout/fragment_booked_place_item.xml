@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/padding_recycler"
+    android:padding="@dimen/general_recycler_padding"
     android:layout_margin="3dp"
     >
     <TextView
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/recycler_item_text"
-        android:textSize="@dimen/size_recycler_text"
+        android:textSize="@dimen/general_recycler_text_size"
         android:textAlignment="center">
 
     </TextView>

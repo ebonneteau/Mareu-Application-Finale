@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/padding_recycler"
+    android:padding="@dimen/general_recycler_padding"
     android:layout_margin="3dp"
     >
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/recycler_card_margin_right"
-        android:layout_marginRight="@dimen/recycler_card_margin_right">
+        android:layout_marginLeft="@dimen/cardView_recycler_attendees_container_margin_right"
+        android:layout_marginRight="@dimen/cardView_recycler_attendees_container_margin_right">
 
     <TextView
         android:id="@+id/an_attendee"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|start"
         android:text="@string/recycler_item_text"
-        android:textSize="@dimen/size_recycler_text"
+        android:textSize="@dimen/general_recycler_text_size"
         android:textAlignment="center"
         >
 
