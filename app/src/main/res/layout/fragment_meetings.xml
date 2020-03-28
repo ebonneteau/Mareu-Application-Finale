@@ -12,60 +12,43 @@
         android:id="@+id/item_list_meetings_place_holder"
         android:layout_width="@dimen/item_list_meetings_place_holder_width"
         android:layout_height="@dimen/item_list_meetings_place_holder_height"
-        android:layout_marginStart="@dimen/item_list_meetings_place_holder_marginStart"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="@dimen/item_list_meetings_place_holder_marginTop"
-        android:layout_marginBottom="@dimen/item_list_meetings_place_holder_marginBottom"
 
+        android:layout_marginBottom="@dimen/item_list_meetings_place_holder_marginBottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
 
-        android:id="@+id/item_list_meeting_object"
-        android:layout_width="wrap_content"
+        android:id="@+id/item_list_meeting_main_line"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/textView_meeting_marginStart"
+        android:layout_marginStart="24dp"
+
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/my_black"
         android:textSize="@dimen/textView_meeting_size"
         android:textStyle="bold"
-        android:textColor="@color/my_black"
-        app:layout_constraintBottom_creator="@+id/item_list_meetings_place_holder"
+
+        app:layout_constraintEnd_toStartOf="@+id/item_list_delete_button"
         app:layout_constraintStart_toEndOf="@+id/item_list_meetings_place_holder"
         app:layout_constraintTop_toTopOf="@+id/item_list_meetings_place_holder" />
 
     <TextView
-        android:id="@+id/item_list_start_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/textView_meeting_size"
-        android:textStyle="bold"
-        android:textColor="@color/my_black"
-        app:layout_constraintBottom_toBottomOf="@+id/item_list_meeting_object"
-        app:layout_constraintStart_toEndOf="@+id/item_list_meeting_object"
-        app:layout_constraintTop_toTopOf="@+id/item_list_meeting_object" />
-
-    <TextView
-        android:id="@+id/textView_item_list_place"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/textView_meeting_size"
-        android:textStyle="bold"
-        android:textColor="@color/my_black"
-        app:layout_constraintBottom_toBottomOf="@+id/item_list_start_time"
-        app:layout_constraintStart_toEndOf="@+id/item_list_start_time"
-        app:layout_constraintTop_toTopOf="@+id/item_list_start_time" />
-
-    <TextView
         android:id="@+id/item_list_booked_attendees"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginStart="24dp"
-        android:textSize="@dimen/textView_meeting_booked_attendees_size"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textColor="@color/my_black"
-        app:layout_constraintStart_toEndOf="@+id/item_list_meetings_place_holder"
-        app:layout_constraintTop_toBottomOf="@id/item_list_meeting_object"
-         />
+        android:textSize="@dimen/textView_meeting_booked_attendees_size"
+        app:layout_constraintEnd_toStartOf="@+id/item_list_delete_button"
+        app:layout_constraintStart_toStartOf="@+id/item_list_meeting_main_line"
+        app:layout_constraintTop_toBottomOf="@id/item_list_meeting_main_line" />
 
     <ImageButton
         android:id="@+id/item_list_delete_button"
@@ -74,11 +57,10 @@
         android:layout_marginEnd="@dimen/item_list_delete_button_marginEnd"
         android:background="@null"
         app:layout_constraintBottom_toBottomOf="@+id/item_list_booked_attendees"
-        app:layout_constraintTop_toTopOf="@id/textView_item_list_place"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_delete"
 
-        />
+        app:layout_constraintTop_toTopOf="@+id/item_list_meeting_main_line"
+        app:srcCompat="@drawable/ic_delete" />
 
 
 </android.support.constraint.ConstraintLayout>

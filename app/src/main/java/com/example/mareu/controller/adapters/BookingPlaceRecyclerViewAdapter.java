@@ -46,7 +46,7 @@ public class BookingPlaceRecyclerViewAdapter extends RecyclerView.Adapter<Bookin
 
     @Override
     public void onBindViewHolder(@NonNull PlacesViewHolder holder, int position) {
-
+        int mPosition = holder.getAdapterPosition();
         Places places = mBookingPlaces.get(position);
         holder.mPlacesListView.setText(places.getPlace());
         //holder.mPlacesListView.setTextColor(generator.getRandomColor());
@@ -61,12 +61,12 @@ public class BookingPlaceRecyclerViewAdapter extends RecyclerView.Adapter<Bookin
                 Snackbar.make(view, "Confirmation: " + holder.mPlacesListView.getText() + " is booked !" , Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
-                selected_position = position;
-                old_position = position;
+                selected_position = mPosition;
+                old_position = mPosition;
                 return;
 
             }
-            if (selected_position == position && old_position == position){
+            if (selected_position == mPosition && old_position == mPosition){
                 holder.itemView.setBackgroundColor(view.getResources().getColor(R.color.item_un_selected));
                 mBookedRoom.onClick(places);
                 Snackbar.make(view,  "Confirmation: " + holder.mPlacesListView.getText() + " is cancelled !", Snackbar.LENGTH_LONG)
@@ -76,7 +76,7 @@ public class BookingPlaceRecyclerViewAdapter extends RecyclerView.Adapter<Bookin
                 selected_position = -1;
                 return;
 
-            }if (old_position != position && selected_position != position ){
+            }if (old_position != mPosition && selected_position != mPosition ){
                 notifyDataSetChanged();
                 mBookedRoom.onClick(places);
                 old_position = -1;
