@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-abstract class DummyReuGenerator {
+abstract class DummyPlacesGenerator {
 
     static List<Places> LIST_PLACES = Arrays.asList(
             new Places(1,"Mario"),

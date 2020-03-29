@@ -1,7 +1,7 @@
 package com.example.mareu.DI;
 
 
-import com.example.mareu.service.DummyReuApiService;
+import com.example.mareu.service.AllActionsReuApiService;
 import com.example.mareu.service.ReuApiService;
 
 /**
@@ -9,7 +9,7 @@ import com.example.mareu.service.ReuApiService;
  */
 public class DI {
 
-    private static ReuApiService service = new DummyReuApiService();
+    private static ReuApiService service = new AllActionsReuApiService();
 
 
     /**
@@ -25,7 +25,7 @@ public class DI {
      * @return
      */
     public static ReuApiService getNewInstanceApiService() {
-        return new DummyReuApiService();
+        return new AllActionsReuApiService();
     }
 
 

@@ -16,6 +16,8 @@ import com.example.mareu.DI.DI;
 import com.example.mareu.R;
 import com.example.mareu.controller.adapters.MeetingsRecyclerViewAdapter;
 import com.example.mareu.events.DeleteMeetingEvent;
+import com.example.mareu.events.SortMeetingsByPlaceEvent;
+import com.example.mareu.events.SortMeetingsByTimeEvent;
 import com.example.mareu.model.Meetings;
 import com.example.mareu.service.ReuApiService;
 
@@ -69,7 +71,7 @@ public class MeetingsFragment extends Fragment {
     }
 
     /**
-     * Init the List of neighbours
+     * Init the List of meetings
      */
     private void initList() {
 
@@ -107,6 +109,22 @@ public class MeetingsFragment extends Fragment {
         Objects.requireNonNull(mRecyclerView.getAdapter()).notifyDataSetChanged();
 
     }
+    /**
+     * Fired if the user uses menu
+     *
+     * @param event
+     */
+    @Subscribe
+    public void onSortMeetingByTime (SortMeetingsByTimeEvent event) {
+        mApiService.getMeetingsByTime();
+        Objects.requireNonNull(mRecyclerView.getAdapter()).notifyDataSetChanged();
+    }
+    @Subscribe
+    public void onSortMeetingByTime (SortMeetingsByPlaceEvent event) {
+        mApiService.getMeetingsByPlace();
+        Objects.requireNonNull(mRecyclerView.getAdapter()).notifyDataSetChanged();
+    }
+
 
 
 

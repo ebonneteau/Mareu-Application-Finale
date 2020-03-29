@@ -8,12 +8,23 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.mareu.DI.DI;
 import com.example.mareu.R;
 import com.example.mareu.controller.adapters.ListMeetingsPagerAdapter;
+import com.example.mareu.controller.adapters.MeetingsRecyclerViewAdapter;
+import com.example.mareu.events.SortMeetingsByPlaceEvent;
+import com.example.mareu.events.SortMeetingsByTimeEvent;
+import com.example.mareu.model.Meetings;
+import com.example.mareu.service.ReuApiService;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     ListMeetingsPagerAdapter mPagerAdapter;
 
     private int mStateMenuShow = 1;
+    private ReuApiService mApiService;
+    private MeetingsRecyclerViewAdapter meetingsRecyclerViewAdapter;
+
 
 
     @Override
@@ -114,9 +128,11 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings_1) {
+            EventBus.getDefault().post(new SortMeetingsByTimeEvent());
             return true;
         }
         if (id == R.id.action_settings_2) {
+            EventBus.getDefault().post(new SortMeetingsByPlaceEvent());
             return true;
         }
 
@@ -126,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+
         super.onResume();
 
     }

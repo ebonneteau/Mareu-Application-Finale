@@ -5,7 +5,7 @@ package com.example.mareu.service;
 
 
 
-import com.example.mareu.model.Attendees;
+
 import com.example.mareu.model.Meetings;
 import com.example.mareu.model.Places;
 
@@ -23,14 +23,25 @@ public interface ReuApiService {
      * @return {@link List}
      */
     List<Places> getPlaces();
-    List<Meetings> getMeetings();
-    List<Attendees> getAttendees();
 
+    /**
+     * Get all Meetings
+     *
+     * @return {@link List}
+     */
+    List<Meetings> getMeetings();
+
+    /**
+     * Menu actions
+     */
+    List<Meetings> getMeetingsByTime();
+
+    List<Meetings> getMeetingsByPlace();
 
     /**
      * Other actions
      */
-    void deleteAttendees(Attendees attendees);
+
 
     void deletePlace (Places places);
 
@@ -38,7 +49,7 @@ public interface ReuApiService {
 
     void addMeeting (Meetings meetings);
 
-    void addAttendees(Attendees attendees);
+
 
 
 }
