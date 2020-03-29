@@ -3,8 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.mareu.controller.MainActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:id="@+id/action_settings_1"
+        android:orderInCategory="10"
+        android:title="@string/action_settings_1"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_settings_2"
+        android:orderInCategory="20"
+        android:title="@string/action_settings_2"
+        />
 </menu>

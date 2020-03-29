@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton mFloatingActionButton;
     ListMeetingsPagerAdapter mPagerAdapter;
 
+    private int mStateMenuShow = 1;
 
 
     @Override
@@ -59,11 +60,14 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         mFloatingActionButton.show();
-
+                        mStateMenuShow = 1; //setting state to true
+                        invalidateOptionsMenu(); // onCreateOptionsMenu(...) is called again
                         break;
                     case 1:
                     default:
                         mFloatingActionButton.hide();
+                        mStateMenuShow = 0; // setting state to false
+                        invalidateOptionsMenu(); //onCreateOptionsMenu(...) is called again
                         break;
                 }
             }
@@ -75,9 +79,8 @@ public class MainActivity extends AppCompatActivity {
         });
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
+
         mFloatingActionButton.setOnClickListener(view -> {
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
             Intent intent = new Intent(MainActivity.this, BookingActivity.class);
             startActivity(intent);
 
@@ -88,6 +91,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        if (mStateMenuShow == 0) {
+            getMenuInflater().inflate(R.menu.menu_main, menu);
+            return false;
+
+        }
+        if (mStateMenuShow == 1) {
+            getMenuInflater().inflate(R.menu.menu_main, menu);
+            return true;
+        }
+
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -100,21 +113,28 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings_1) {
+            return true;
+        }
+        if (id == R.id.action_settings_2) {
             return true;
         }
 
+
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void onResume() {
         super.onResume();
 
     }
+
     @Override
     protected void onPause() {
         super.onPause();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

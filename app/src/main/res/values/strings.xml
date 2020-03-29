@@ -2,7 +2,8 @@
     <string name="app_name">Ma reu</string>
     <string name="tab_meetings_title">meetings</string>
     <string name="tab_places_title">places</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings_1">Sort by date</string>
+    <string name="action_settings_2">Sort by place</string>
     <string name="title_activity_attendee_details">AttendeeDetailsActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
