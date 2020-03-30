@@ -76,6 +76,7 @@
             android:layout_height="@dimen/cardView_time_container_height"
             android:layout_marginLeft="@dimen/cardViews_general_margin_left_right"
             android:layout_marginRight="@dimen/cardViews_general_margin_left_right"
+
             >
 
 
@@ -97,6 +98,8 @@
                 android:textSize="@dimen/textView_clock_size"
                 android:textColor="@color/my_black"
                 android:text="@string/meeting_start_time"
+                android:maxLines="1"
+                android:ellipsize="end"
                 />
 
             <Button
@@ -136,6 +139,8 @@
                 android:textSize="@dimen/textView_clock_size"
                 android:textColor="@color/my_black"
                 android:text="@string/meeting_end_time"
+                android:maxLines="1"
+                android:ellipsize="end"
                 />
 
             <Button
@@ -156,17 +161,18 @@
 
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
+            android:id="@+id/cardView_select_meeting_room_title_container"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/cardView_title_general_height"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginRight="@dimen/general_cardView_title_marginLeftAndRight"
+            android:layout_marginLeft="@dimen/general_cardView_title_marginLeftAndRight"
             android:layout_marginBottom="16dp"
             >
             <TextView
-                android:id="@+id/card_booking_room_title"
+                android:id="@+id/textView_card_booking_room_title"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/cardView_title_general_height"
+                android:layout_height="match_parent"
                 android:text="@string/select_the_room"
                 android:textSize="@dimen/general_cardView_title_text_size"
                 android:textStyle="bold"
@@ -178,6 +184,7 @@
 
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
+            android:id="@+id/cardView_meeting_room_recycler_container"
             android:layout_width="match_parent"
             android:layout_height="@dimen/cardView_recycler_attendees_container_height"
             android:layout_marginStart="@dimen/cardView_recycler_attendees_container_margin_left"
@@ -204,7 +211,7 @@
             android:layout_marginBottom="@dimen/cardView_add_attendees_title_container_marginBottom"
             >
             <TextView
-                android:id="@+id/cardView_attendee_title_container"
+                android:id="@+id/textView_attendee_title_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/add_attendees_text_card"
@@ -244,6 +251,8 @@
                     android:fitsSystemWindows="true"
                     android:inputType="textWebEmailAddress"
                     android:imeOptions="actionDone"
+                    android:maxLines="1"
+                    android:ellipsize="end"
 
                     />
             </LinearLayout>

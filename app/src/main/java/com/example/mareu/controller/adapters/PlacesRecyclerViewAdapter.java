@@ -1,8 +1,6 @@
 package com.example.mareu.controller.adapters;
 
 
-import android.content.Intent;
-
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +14,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mareu.DI.DI;
 import com.example.mareu.R;
-import com.example.mareu.controller.MeetingDetailsActivity;
 import com.example.mareu.events.DeletePlaceEvent;
 import com.example.mareu.model.Places;
 import com.example.mareu.service.ColorGenerator;

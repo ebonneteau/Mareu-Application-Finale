@@ -9,17 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".controller.MeetingDetailsActivity"
-            android:label="@string/title_activity_attendee_details"
-
-            ></activity>
+        <activity android:name=".controller.BookedActivity"></activity>
         <activity
             android:name=".controller.BookingActivity"
-            android:windowSoftInputMode="adjustResize"
-
-
-            />
+            android:windowSoftInputMode="adjustResize" />
 
         <service
             android:name=".service.ReuApiService"
@@ -36,6 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

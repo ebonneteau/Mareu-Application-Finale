@@ -2,6 +2,7 @@ package com.example.mareu.controller.adapters;
 
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mareu.R;
-import com.example.mareu.controller.MeetingDetailsActivity;
+import com.example.mareu.controller.BookedActivity;
 import com.example.mareu.events.DeleteMeetingEvent;
 import com.example.mareu.model.Attendees;
 import com.example.mareu.model.Meetings;
@@ -22,6 +23,7 @@ import com.example.mareu.service.ColorGenerator;
 import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -79,9 +81,15 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
         //method to view details on item click
         holder.itemView.setOnClickListener(v -> {
 
-            Intent intent = new Intent(holder.itemView.getContext(), MeetingDetailsActivity.class);
+            Intent intent = new Intent(holder.itemView.getContext(), BookedActivity.class);
 
             intent.putExtra("item_meeting_place", meetings.getPlace());
+            intent.putExtra("item_meeting_object", meetings.getObject());
+            intent.putExtra("item_meeting_start_time", meetings.getStartTime());
+            intent.putExtra("item_meeting_end_time", meetings.getEndTime());
+            intent.putExtra("item_meeting_attendees", String.valueOf(meetings.getAttendees()));
+
+
 
             //Launch MeetingDetails activity
             holder.itemView.getContext().startActivity(intent);

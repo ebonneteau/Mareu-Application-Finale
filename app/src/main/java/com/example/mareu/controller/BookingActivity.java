@@ -61,9 +61,9 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
     TextView mMeetingEndTime;
     @BindView(R.id.booking_time_title)
     TextView mBookingTimeTextView;
-    @BindView(R.id.card_booking_room_title)
+    @BindView(R.id.textView_card_booking_room_title)
     TextView mBookingPlaceTextView;
-    @BindView(R.id.cardView_attendee_title_container)
+    @BindView(R.id.textView_attendee_title_container)
     TextView mBookingAttendeesTextView;
     @BindView(R.id.editText_meeting_object)
     EditText mMeetingObjectInput;
@@ -344,6 +344,9 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             mMeetingEndTime.setText(new StringBuilder().append("Meeting ends at: ")
                     .append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
                     .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString());
+            //mEndTime is the same valus without text "Meetings ends at: "
+            mEndTime = new StringBuilder().append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
+                    .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString();
 
         }
         if (mStartMinute + 45 == 60) {
@@ -353,6 +356,9 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             mMeetingEndTime.setText(new StringBuilder().append("Meeting ends at: ")
                     .append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
                     .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString());
+            //mEndTime is the same valus without text "Meetings ends at: "
+            mEndTime = new StringBuilder().append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
+                    .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString();
         }
         if (mStartMinute + 45 < 60) {
             mEndMinute = mStartMinute + 45;
@@ -361,6 +367,9 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             mMeetingEndTime.setText(new StringBuilder().append("Meeting ends at: ")
                     .append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
                     .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString());
+            //mEndTime is the same valus without text "Meetings ends at: "
+            mEndTime = new StringBuilder().append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
+                    .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString();
         }
     }
 

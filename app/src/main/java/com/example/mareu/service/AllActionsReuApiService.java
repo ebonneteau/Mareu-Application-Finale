@@ -76,11 +76,11 @@ public class AllActionsReuApiService implements ReuApiService {
      * Collections methods
      */
 
-    public List<Meetings> getMeetingObjectByTime() {
+    private List<Meetings> getMeetingObjectByTime() {
         Collections.sort(meetingObject, (o1, o2) -> o1.getStartTime().compareTo(o2.getStartTime()));
         return meetingObject;
     }
-    public List<Meetings> getMeetingObjectByPlace() {
+    private List<Meetings> getMeetingObjectByPlace() {
         Collections.sort(meetingObject, (o1, o2) -> o1.getPlace().compareTo(o2.getPlace()));
         return meetingObject;
     }
