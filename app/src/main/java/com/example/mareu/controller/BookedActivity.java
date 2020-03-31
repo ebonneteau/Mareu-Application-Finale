@@ -1,7 +1,7 @@
 package com.example.mareu.controller;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -13,11 +13,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.example.mareu.R;
-import com.example.mareu.model.Attendees;
-import com.example.mareu.model.Meetings;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -70,16 +66,12 @@ public class BookedActivity extends AppCompatActivity {
     RecyclerView mPlacesRecyclerView;
 
 
-
-    //Needed values for new meeting creation
+    //Needed values for meeting consultation
     private String mMeetingObject;
     private String mStartTime;
     private String mEndTime;
     private String mSelectedPlace;
     private String mSelectedAttendees;
-
-
-
 
 
 
@@ -117,6 +109,10 @@ public class BookedActivity extends AppCompatActivity {
         mCardViewWhereMeetingObjectIsNowInserted.setLayoutParams(mNewParams);
         mAddAttendeesTitleCardView.setLayoutParams(mNewParams);
 
+        //Activate  mValidationButton
+        mValidationButton.setVisibility(View.VISIBLE);
+        mValidationButton.setOnClickListener( view -> finish() );
+
         getIncomingIntent();
     }
 
@@ -124,8 +120,8 @@ public class BookedActivity extends AppCompatActivity {
     private void getIncomingIntent() {
         // This method rescues
         // values from a click on recyclerView
-        //  intent.putExtra
-        //Don't forget to call this method in the onCreate
+        // intent.putExtra
+        // Don't forget to call this method in the onCreate
 
         if (getIntent().hasExtra("item_meeting_place")) {
             mSelectedPlace = getIntent().getStringExtra("item_meeting_place");
@@ -143,6 +139,7 @@ public class BookedActivity extends AppCompatActivity {
 
     private void setAllNeededValues() {
 
+        mValidationButton.setText( getString( R.string.button_validation_gotIt) );
         mBookingPlaceTextView.setText(new StringBuilder().append("ROOM SELECTED: ").append(mSelectedPlace));
         mBookingTimeTextView.setText(new StringBuilder().append("MEETING OBJECT: ").append(mMeetingObject));
         mMeetingStartTime.setText(new StringBuilder().append("STARTS AT: ").append(mStartTime));

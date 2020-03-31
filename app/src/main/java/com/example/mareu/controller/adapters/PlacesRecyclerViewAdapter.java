@@ -32,10 +32,7 @@ import butterknife.ButterKnife;
 public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecyclerViewAdapter.ViewHolder> {
 
     private final List<Places> mPlaces;
-    private ReuApiService mApiService;
-    private ColorGenerator generator = ColorGenerator.MATERIAL;
-    ImageView mFakeImage;
-
+    private final ColorGenerator generator = ColorGenerator.MATERIAL;
 
 
     public PlacesRecyclerViewAdapter(List<Places> items) {
@@ -46,42 +43,32 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_places, parent, false);
-        return new ViewHolder(view);
+        View view = LayoutInflater.from( parent.getContext() )
+                .inflate( R.layout.fragment_places, parent, false );
+        return new ViewHolder( view );
     }
 
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Places places = mPlaces.get(position);
-        holder.mMeetingPlace.setText(places.getPlace());
+        Places places = mPlaces.get( position );
+        holder.mMeetingPlace.setText( places.getPlace() );
 
 
-
-        Glide.with(holder.mFakeImageHolder.getContext())
-         .load(R.drawable.ic_launcher_background)
-         .apply(RequestOptions.circleCropTransform())
-         .into(holder.mFakeImageHolder);
+        Glide.with( holder.mFakeImageHolder.getContext() )
+                .load( R.drawable.ic_launcher_background )
+                .apply( RequestOptions.circleCropTransform() )
+                .into( holder.mFakeImageHolder );
         //Generate random colors on placeHolder
-        holder.mFakeImageHolder.setColorFilter(generator.getRandomColor());
+        holder.mFakeImageHolder.setColorFilter( generator.getColor(position) );
 
 
+        holder.mDeleteButton.setOnClickListener( v -> {
 
+            EventBus.getDefault().post( new DeletePlaceEvent( places ) );
 
-        holder.mDeleteButton.setOnClickListener(v -> {
-            mApiService = DI.getReuApiService();
-            EventBus.getDefault().post(new DeletePlaceEvent(places));
+        } );
 
-        });
-
-        //method to view details on item click
-        //holder.mMeetingPlace.setOnClickListener(v -> {
-        //    Intent intent = new Intent(holder.mMeetingPlace.getContext(), MeetingDetailsActivity.class);
-        //    intent.putExtra("item_meeting_place", places.getPlace());
-        //    //Launch MeetingDetails activity
-        //    holder.mMeetingPlace.getContext().startActivity(intent);
-        //});
     }
 
     @Override
@@ -99,8 +86,8 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
 
 
         ViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+            super( view );
+            ButterKnife.bind( this, view );
         }
     }
 }

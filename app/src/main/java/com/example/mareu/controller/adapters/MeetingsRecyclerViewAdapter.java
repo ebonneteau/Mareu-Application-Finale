@@ -61,7 +61,7 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.mPlaceHolder);
         //Generate random colors on placeHolder
-        holder.mPlaceHolder.setColorFilter(generator.getRandomColor());
+        holder.mPlaceHolder.setColorFilter(generator.getColor(position));
         //Create a separator between 2 attendees
         StringBuilder attendeesLookInList = new StringBuilder();
         for (Attendees mBookedAttendees : meetings.getAttendees()) {

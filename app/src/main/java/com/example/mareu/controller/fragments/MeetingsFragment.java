@@ -49,7 +49,7 @@ public class MeetingsFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate( savedInstanceState );
         mApiService = DI.getReuApiService();
 
     }
@@ -57,13 +57,14 @@ public class MeetingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_meetings_list, container, false);
+        View view = inflater.inflate( R.layout.fragment_meetings_list, container, false );
 
         Context context = view.getContext();
         mRecyclerView = (RecyclerView) view;
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        mRecyclerView.setLayoutManager( new LinearLayoutManager( context ) );
         //Added requireNonNull option
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.VERTICAL));
+        mRecyclerView.addItemDecoration( new DividerItemDecoration( Objects.requireNonNull( getContext() ),
+                DividerItemDecoration.VERTICAL ) );
 
         initList();
 
@@ -76,23 +77,25 @@ public class MeetingsFragment extends Fragment {
     private void initList() {
 
         mMeetings = mApiService.getMeetings();
-        mRecyclerView.setAdapter(new MeetingsRecyclerViewAdapter(mMeetings));
+        mRecyclerView.setAdapter( new MeetingsRecyclerViewAdapter( mMeetings ) );
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
+        EventBus.getDefault().register( this );
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        EventBus.getDefault().unregister(this);
+        EventBus.getDefault().unregister( this );
     }
+
     @Override
     public void onResume() {
-        // method to reload fragment each time user navigates on it
+        // method to reload fragment once activity is finished (BookingActivity)
+        // Because this activity add meeting without using eventBus (only API) adding a meeting
         // //(...not really eventually cf.remove favorite from NeighborRecycler)
         super.onResume();
         initList();
@@ -104,29 +107,28 @@ public class MeetingsFragment extends Fragment {
      * @param event
      */
     @Subscribe
-    public void onDeleteMeeting (DeleteMeetingEvent event) {
-        mApiService.deleteMeeting(event.meetings);
-        Objects.requireNonNull(mRecyclerView.getAdapter()).notifyDataSetChanged();
+    public void onDeleteMeeting(DeleteMeetingEvent event) {
+        mApiService.deleteMeeting( event.meetings );
+        Objects.requireNonNull( mRecyclerView.getAdapter() ).notifyDataSetChanged();
 
     }
+
     /**
      * Fired if the user uses menu
      *
      * @param event
      */
     @Subscribe
-    public void onSortMeetingByTime (SortMeetingsByTimeEvent event) {
+    public void onSortMeetingByTime(SortMeetingsByTimeEvent event) {
         mApiService.getMeetingsByTime();
-        Objects.requireNonNull(mRecyclerView.getAdapter()).notifyDataSetChanged();
+        Objects.requireNonNull( mRecyclerView.getAdapter() ).notifyDataSetChanged();
     }
+
     @Subscribe
-    public void onSortMeetingByTime (SortMeetingsByPlaceEvent event) {
+    public void onSortMeetingByTime(SortMeetingsByPlaceEvent event) {
         mApiService.getMeetingsByPlace();
-        Objects.requireNonNull(mRecyclerView.getAdapter()).notifyDataSetChanged();
+        Objects.requireNonNull( mRecyclerView.getAdapter() ).notifyDataSetChanged();
     }
-
-
-
 
 
 }

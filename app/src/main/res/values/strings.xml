@@ -108,4 +108,5 @@
     <string name="meeting_end_time_want_to_change">CHANGE THIS</string>
     <string name="dash_between_meeting_object_and_start_time">------------</string>
     <string name="room_selected_in_booked_activity">ROOM SELECTED</string>
+    <string name="button_validation_gotIt">GOT IT !</string>
 </resources>

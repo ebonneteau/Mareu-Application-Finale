@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.example.mareu.DI.DI;
 import com.example.mareu.R;
 import com.example.mareu.model.Places;
-import com.example.mareu.service.ColorGenerator;
 import com.example.mareu.service.ReuApiService;
 
 import java.util.List;
@@ -24,7 +23,6 @@ public class BookingPlaceRecyclerViewAdapter extends RecyclerView.Adapter<Bookin
     private LayoutInflater mInflater;
     private ReuApiService mApiService;
     private static final String TAG = "RecyclerPlaces";
-    private ColorGenerator generator = ColorGenerator.MATERIAL;
     private OnSelectedBookedRoom mBookedRoom;
     private int selected_position = -1;
     private int old_position = -1;
@@ -49,7 +47,6 @@ public class BookingPlaceRecyclerViewAdapter extends RecyclerView.Adapter<Bookin
         int mPosition = holder.getAdapterPosition();
         Places places = mBookingPlaces.get(position);
         holder.mPlacesListView.setText(places.getPlace());
-        //holder.mPlacesListView.setTextColor(generator.getRandomColor());
         holder.itemView.setBackgroundColor(holder.itemView.getResources().getColor(R.color.item_un_selected));
         holder.itemView.setOnClickListener(view -> {
 
