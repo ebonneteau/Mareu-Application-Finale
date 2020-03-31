@@ -32,7 +32,7 @@ public class Attendees {
     public Integer getId() {
         return id;
     }
-    //Added method to display list of list
+    //Added method to display list of list in a string format
     @Override
     public String toString() {
         return mailAddress;

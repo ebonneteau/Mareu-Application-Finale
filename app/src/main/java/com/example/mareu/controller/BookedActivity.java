@@ -13,7 +13,11 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.example.mareu.R;
+import com.example.mareu.model.Attendees;
+import com.example.mareu.model.Meetings;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -111,7 +115,6 @@ public class BookedActivity extends AppCompatActivity {
 
         //Apply to views
         mCardViewWhereMeetingObjectIsNowInserted.setLayoutParams(mNewParams);
-        //mMeetingRoomCardView.setLayoutParams(mNewParams);
         mAddAttendeesTitleCardView.setLayoutParams(mNewParams);
 
         getIncomingIntent();
@@ -129,7 +132,8 @@ public class BookedActivity extends AppCompatActivity {
             mMeetingObject = getIntent().getStringExtra("item_meeting_object");
             mStartTime = getIntent().getStringExtra("item_meeting_start_time");
             mEndTime = getIntent().getStringExtra("item_meeting_end_time");
-            mSelectedAttendees = getIntent().getStringExtra("item_meeting_attendees");
+            mSelectedAttendees = getIntent().getStringExtra("list_meeting_attendees");
+
 
             //Method called to replace some values of layout given fields
             setAllNeededValues();
@@ -139,15 +143,15 @@ public class BookedActivity extends AppCompatActivity {
 
     private void setAllNeededValues() {
 
-        // By default the CollapsingToolbarLayout name displayed, is the app name.
-        // In this case it is "Neighbour Detail"
-        // This method displays any given value
-        // instead of default title.
-        mBookingPlaceTextView.setText(String.format("Selected place: %s", mSelectedPlace));
-        mBookingTimeTextView.setText(String.format("Object: %s", mMeetingObject));
-        mMeetingStartTime.setText(String.format("From: %s", mStartTime));
-        mMeetingEndTime.setText(String.format("To: %s", mEndTime));
-        mBookingAttendeesTextView.setText(String.format("Attendees:  %s", mSelectedAttendees));
+        mBookingPlaceTextView.setText(new StringBuilder().append("ROOM SELECTED: ").append(mSelectedPlace));
+        mBookingTimeTextView.setText(new StringBuilder().append("MEETING OBJECT: ").append(mMeetingObject));
+        mMeetingStartTime.setText(new StringBuilder().append("STARTS AT: ").append(mStartTime));
+        mMeetingEndTime.setText(new StringBuilder().append("ENS AT: ").append(mEndTime));
+        //Remove first and last char of the string ("[" and "]")
+        //To do this I record the string from 2nd (1) position to beforeLast position (length -1)
+        mSelectedAttendees = mSelectedAttendees.substring( 1,(mSelectedAttendees.length()-1) );
+        mBookingAttendeesTextView.setText(new StringBuilder().append("ATTENDEES: ")
+                .append(mSelectedAttendees));
 
     }
     //Method for home button

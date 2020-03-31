@@ -87,7 +87,7 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
             intent.putExtra("item_meeting_object", meetings.getObject());
             intent.putExtra("item_meeting_start_time", meetings.getStartTime());
             intent.putExtra("item_meeting_end_time", meetings.getEndTime());
-            intent.putExtra("item_meeting_attendees", String.valueOf(meetings.getAttendees()));
+            intent.putExtra("list_meeting_attendees",(meetings.getAttendees().toString()));
 
 
 
