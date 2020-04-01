@@ -122,6 +122,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         //Request focus on mMeetingObjectInput EditText
         mMeetingObjectInput.requestFocus();
 
+
         //*********
         //Recyclers
         //*********
