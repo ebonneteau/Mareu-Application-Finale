@@ -345,7 +345,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             mMeetingEndTime.setText(new StringBuilder().append("Meeting ends at: ")
                     .append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
                     .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString());
-            //mEndTime is the same valus without text "Meetings ends at: "
+            //mEndTime is the same value without text "Meetings ends at: "
             mEndTime = new StringBuilder().append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
                     .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString();
 
@@ -357,7 +357,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             mMeetingEndTime.setText(new StringBuilder().append("Meeting ends at: ")
                     .append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
                     .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString());
-            //mEndTime is the same valus without text "Meetings ends at: "
+            //mEndTime is the same value without text "Meetings ends at: "
             mEndTime = new StringBuilder().append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
                     .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString();
         }
@@ -368,7 +368,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             mMeetingEndTime.setText(new StringBuilder().append("Meeting ends at: ")
                     .append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
                     .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString());
-            //mEndTime is the same valus without text "Meetings ends at: "
+            //mEndTime is the same value without text "Meetings ends at: "
             mEndTime = new StringBuilder().append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
                     .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString();
         }

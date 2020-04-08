@@ -134,6 +134,7 @@ public class BookedActivity extends AppCompatActivity {
             //Method called to replace some values of layout given fields
             setAllNeededValues();
 
+
         }
     }
 
@@ -149,6 +150,7 @@ public class BookedActivity extends AppCompatActivity {
         mSelectedAttendees = mSelectedAttendees.substring( 1,(mSelectedAttendees.length()-1) );
         mBookingAttendeesTextView.setText(new StringBuilder().append("ATTENDEES: ")
                 .append(mSelectedAttendees));
+
 
     }
     //Method for home button

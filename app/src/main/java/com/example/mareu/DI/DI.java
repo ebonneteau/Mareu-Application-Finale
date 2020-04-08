@@ -20,13 +20,7 @@ public class DI {
         return service;
     }
 
-    /**
-     * Get always a new instance on @{@link ReuApiService}. Useful for tests, so we ensure the context is clean.
-     * @return
-     */
-    public static ReuApiService getNewInstanceApiService() {
-        return new AllActionsReuApiService();
-    }
+
 
 
 }

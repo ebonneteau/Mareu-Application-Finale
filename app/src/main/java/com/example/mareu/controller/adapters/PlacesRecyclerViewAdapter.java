@@ -12,12 +12,10 @@ import android.widget.TextView;
 //import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.mareu.DI.DI;
 import com.example.mareu.R;
 import com.example.mareu.events.DeletePlaceEvent;
 import com.example.mareu.model.Places;
 import com.example.mareu.service.ColorGenerator;
-import com.example.mareu.service.ReuApiService;
 
 import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;

@@ -9,9 +9,9 @@ import java.util.Arrays;
 import java.util.List;
 
 
-abstract class DummyPlacesGenerator {
+public abstract class DummyPlacesGenerator {
 
-    static List<Places> LIST_PLACES = Arrays.asList(
+    public static List<Places> LIST_PLACES = Arrays.asList(
             new Places(1,"Mario"),
             new Places(2, "Luigi"),
             new Places(3, "Athena"),
