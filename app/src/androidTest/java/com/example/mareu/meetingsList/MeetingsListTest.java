@@ -10,16 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-
 import com.example.mareu.DI.DI;
 import com.example.mareu.R;
-
 import com.example.mareu.controller.MainActivity;
 import com.example.mareu.model.Attendees;
 import com.example.mareu.model.Meetings;
 import com.example.mareu.service.ReuApiService;
 import com.example.mareu.utils.DeleteViewAction;
-
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -41,16 +38,15 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static com.example.mareu.utils.RecyclerViewItemCountAssertion.withItemCount;
+import static com.example.mareu.utils.RecyclerViewExternalMethods.withItemCount;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.core.IsNull.notNullValue;
 
 
 /**
- * Test class for list of favorites
+ * Test class for list of meetings
  */
 @RunWith(AndroidJUnit4.class)
 public class MeetingsListTest {
@@ -62,7 +58,8 @@ public class MeetingsListTest {
      */
     private ReuApiService service;
 
-    private static int ITEMS_COUNT = 3;
+
+
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule =
@@ -92,6 +89,7 @@ public class MeetingsListTest {
 
 
 
+
     /**
      * We ensure that our recyclerView is displaying 3 elements
      */
@@ -101,7 +99,7 @@ public class MeetingsListTest {
                 .check( matches( hasMinimumChildCount( 1 ) ) );
     }
     @Test
-    public void myMeetingList_shouldSortByTime() {
+    public void myMeetingList_shouldFilterByTime() {
         openActionBarOverflowOrOptionsMenu( getInstrumentation().getTargetContext() );
 
         ViewInteraction appCompatTextView = onView(
@@ -132,7 +130,7 @@ public class MeetingsListTest {
 
     }
     @Test
-    public void myMeetingList_shouldSortByPlace() {
+    public void myMeetingList_shouldFilterByPlace() {
         openActionBarOverflowOrOptionsMenu( getInstrumentation().getTargetContext() );
 
         ViewInteraction appCompatTextView = onView(
@@ -161,12 +159,13 @@ public class MeetingsListTest {
 
     @Test
     public void myNeighboursList_deleteAction_shouldRemoveItem() {
+        int ITEMS_COUNT = service.getMeetings().size() ;
         // Given : We remove the element at position 1
         onView(ViewMatchers.withId(R.id.fragment_item_list_meetings)).check(withItemCount(ITEMS_COUNT));
         // When perform a click on a delete icon
         onView(ViewMatchers.withId(R.id.fragment_item_list_meetings))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
-        // Then : the number of element is 2
+        // Then : the number of element decrease by 1
         onView(ViewMatchers.withId(R.id.fragment_item_list_meetings)).check(withItemCount(ITEMS_COUNT - 1));
 
     }

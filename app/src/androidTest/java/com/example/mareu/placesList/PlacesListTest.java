@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import com.example.mareu.DI.DI;
 import com.example.mareu.R;
 import com.example.mareu.controller.MainActivity;
 import com.example.mareu.service.ReuApiService;
@@ -32,7 +31,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChild
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static com.example.mareu.utils.RecyclerViewItemCountAssertion.withItemCount;
+import static com.example.mareu.utils.RecyclerViewExternalMethods.withItemCount;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.core.IsNull.notNullValue;
 
@@ -94,7 +93,7 @@ public class PlacesListTest {
         // When perform a click on a delete icon
         onView(ViewMatchers.withId(R.id.fragment_item_list_places))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(2, new DeleteViewAction()));
-        // Then : the number of element is deleted
+        // Then : the number of element 9
         onView(ViewMatchers.withId(R.id.fragment_item_list_places)).check(withItemCount(ITEMS_COUNT - 1));
 
     }
