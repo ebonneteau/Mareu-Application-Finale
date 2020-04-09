@@ -5,9 +5,7 @@ import com.example.mareu.model.Meetings;
 import com.example.mareu.model.Places;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -32,9 +30,6 @@ public class AllActionsReuApiService implements ReuApiService {
     }
 
 
-
-
-
     /**
      * Menu actions
      */
@@ -43,6 +38,7 @@ public class AllActionsReuApiService implements ReuApiService {
 
         return getMeetingObjectByTime();
     }
+
     @Override
     public List<Meetings> getMeetingsByPlace() {
 
@@ -55,20 +51,20 @@ public class AllActionsReuApiService implements ReuApiService {
      */
     @Override
     public void deleteMeeting(Meetings meetings) {
-        meetingObject.remove(meetings);
+        meetingObject.remove( meetings );
 
     }
 
     @Override
     public void addMeeting(Meetings meetings) {
-        meetingObject.add(meetings);
+        meetingObject.add( meetings );
 
     }
 
 
     @Override
     public void deletePlace(Places places) {
-        placeObject.remove(places);
+        placeObject.remove( places );
 
     }
 
@@ -77,11 +73,12 @@ public class AllActionsReuApiService implements ReuApiService {
      */
 
     private List<Meetings> getMeetingObjectByTime() {
-        Collections.sort(meetingObject, (o1, o2) -> o1.getStartTime().compareTo(o2.getStartTime()));
+        Collections.sort( meetingObject, (o1, o2) -> o1.getStartTime().compareTo( o2.getStartTime() ) );
         return meetingObject;
     }
+
     private List<Meetings> getMeetingObjectByPlace() {
-        Collections.sort(meetingObject, (o1, o2) -> o1.getPlace().compareTo(o2.getPlace()));
+        Collections.sort( meetingObject, (o1, o2) -> o1.getPlace().compareTo( o2.getPlace() ) );
         return meetingObject;
     }
 }

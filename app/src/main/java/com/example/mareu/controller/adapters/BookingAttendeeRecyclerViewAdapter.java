@@ -24,8 +24,8 @@ public class BookingAttendeeRecyclerViewAdapter extends RecyclerView.Adapter<Boo
     private onSelectedRemovedAttendee mRemovedAttendee;
     private ImageView mRemovedButton;
 
-    public BookingAttendeeRecyclerViewAdapter(Context context, List<Attendees> attendees, onSelectedRemovedAttendee removedAttendee   ) {
-        mInflater = LayoutInflater.from(context);
+    public BookingAttendeeRecyclerViewAdapter(Context context, List<Attendees> attendees, onSelectedRemovedAttendee removedAttendee) {
+        mInflater = LayoutInflater.from( context );
         this.mAttendees = attendees;
         this.mRemovedAttendee = removedAttendee;
     }
@@ -33,43 +33,45 @@ public class BookingAttendeeRecyclerViewAdapter extends RecyclerView.Adapter<Boo
     @NonNull
     @Override
     public BookingAttendeeRecyclerViewAdapter.AttendeesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View mItemView = mInflater.inflate(R.layout.fragment_booked_attendee_item, parent, false);
-        return new AttendeesViewHolder (mItemView, this);
+        View mItemView = mInflater.inflate( R.layout.fragment_booked_attendee_item, parent, false );
+        return new AttendeesViewHolder( mItemView, this );
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull AttendeesViewHolder holder, int position) {
-        Attendees attendees = mAttendees.get(position);
-        holder.mAttendeesListView.setText(attendees.getMailAddress());
-        mRemovedButton.setOnClickListener(view->{
+        Attendees attendees = mAttendees.get( position );
+        holder.mAttendeesListView.setText( attendees.getMailAddress() );
+        mRemovedButton.setOnClickListener( view -> {
 
-            mRemovedAttendee.onClick(attendees);
+            mRemovedAttendee.onClick( attendees );
             notifyDataSetChanged();
-        });
+        } );
 
 
     }
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "Attendess list size"  +mAttendees.size() );
+        Log.d( TAG, "Attendees list size" + mAttendees.size() );
         return mAttendees.size();
 
     }
-    class AttendeesViewHolder extends RecyclerView.ViewHolder{
-        public final TextView mAttendeesListView;
+
+    class AttendeesViewHolder extends RecyclerView.ViewHolder {
+        final TextView mAttendeesListView;
         final BookingAttendeeRecyclerViewAdapter mAdapter;
 
-        public AttendeesViewHolder(@NonNull View itemView, BookingAttendeeRecyclerViewAdapter adapter ) {
-            super(itemView);
-            mAttendeesListView = itemView.findViewById(R.id.an_attendee);
-            mRemovedButton = itemView.findViewById(R.id.attendee_delete_button);
+        AttendeesViewHolder(@NonNull View itemView, BookingAttendeeRecyclerViewAdapter adapter) {
+            super( itemView );
+            mAttendeesListView = itemView.findViewById( R.id.an_attendee );
+            mRemovedButton = itemView.findViewById( R.id.attendee_delete_button );
             this.mAdapter = adapter;
         }
     }
+
     //interface to rescue click on delete button attendee in BookingActivity
-    public interface onSelectedRemovedAttendee{
-        void onClick (Attendees attendees);
+    public interface onSelectedRemovedAttendee {
+        void onClick(Attendees attendees);
     }
 }

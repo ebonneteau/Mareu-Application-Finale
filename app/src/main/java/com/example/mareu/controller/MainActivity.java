@@ -41,17 +41,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        setSupportActionBar(mToolbar);
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.activity_main );
+        ButterKnife.bind( this );
+        setSupportActionBar( mToolbar );
 
-        mPagerAdapter = new ListMeetingsPagerAdapter(getSupportFragmentManager());
-        mViewPager.setAdapter(mPagerAdapter);
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+        mPagerAdapter = new ListMeetingsPagerAdapter( getSupportFragmentManager() );
+        mViewPager.setAdapter( mPagerAdapter );
+        mViewPager.addOnPageChangeListener( new TabLayout.TabLayoutOnPageChangeListener( mTabLayout ) );
         // Adding FloatingActionButton method
         // FloatingActionButton will appear only on meeting page listener
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mViewPager.addOnPageChangeListener( new ViewPager.OnPageChangeListener() {
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -79,15 +79,15 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
 
             }
-        });
-        mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+        } );
+        mTabLayout.addOnTabSelectedListener( new TabLayout.ViewPagerOnTabSelectedListener( mViewPager ) );
 
 
-        mFloatingActionButton.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, BookingActivity.class);
-            startActivity(intent);
+        mFloatingActionButton.setOnClickListener( view -> {
+            Intent intent = new Intent( MainActivity.this, BookingActivity.class );
+            startActivity( intent );
 
-        });
+        } );
     }
 
 
@@ -95,16 +95,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         if (mStateMenuShow == 0) {
-            getMenuInflater().inflate(R.menu.menu_main, menu);
+            getMenuInflater().inflate( R.menu.menu_main, menu );
             return false;
 
         }
         if (mStateMenuShow == 1) {
-            getMenuInflater().inflate(R.menu.menu_main, menu);
+            getMenuInflater().inflate( R.menu.menu_main, menu );
             return true;
         }
 
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate( R.menu.menu_main, menu );
         return true;
     }
 
@@ -117,16 +117,16 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings_1) {
-            EventBus.getDefault().post(new SortMeetingsByTimeEvent());
+            EventBus.getDefault().post( new SortMeetingsByTimeEvent() );
             return true;
         }
         if (id == R.id.action_settings_2) {
-            EventBus.getDefault().post(new SortMeetingsByPlaceEvent());
+            EventBus.getDefault().post( new SortMeetingsByPlaceEvent() );
             return true;
         }
 
 
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected( item );
     }
 
     @Override

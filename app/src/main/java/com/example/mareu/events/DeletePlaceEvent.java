@@ -1,7 +1,6 @@
 package com.example.mareu.events;
 
 
-
 import com.example.mareu.model.Places;
 
 /**
@@ -16,6 +15,7 @@ public class DeletePlaceEvent {
 
     /**
      * Constructor.
+     *
      * @param places
      */
     public DeletePlaceEvent(Places places) {

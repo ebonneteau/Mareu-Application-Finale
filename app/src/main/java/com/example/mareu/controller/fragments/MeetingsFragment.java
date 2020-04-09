@@ -94,9 +94,6 @@ public class MeetingsFragment extends Fragment {
 
     @Override
     public void onResume() {
-        // method to reload fragment once activity is finished (BookingActivity)
-        // Because this activity add meeting without using eventBus (only API) adding a meeting
-        // //(...not really eventually cf.remove favorite from NeighborRecycler)
         super.onResume();
         initList();
     }

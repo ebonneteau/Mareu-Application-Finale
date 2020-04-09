@@ -1,24 +1,25 @@
 package com.example.mareu.model;
 
 
-
 import java.util.Objects;
 
 public class Places {
 
 
-    /** Identifier */
+    /**
+     * Identifier
+     */
     private Integer id;
 
-    /** Full name */
+    /**
+     * Full name
+     */
     private String place;
-
-
-
 
 
     /**
      * Constructor
+     *
      * @param id
      * @param place
      */
@@ -40,12 +41,10 @@ public class Places {
     public String getPlace() {
         return place;
     }
-
+    //For later usage
     public void setPlace(String place) {
         this.place = place;
     }
-
-
 
 
     @Override
@@ -53,11 +52,11 @@ public class Places {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Places attendees = (Places) o;
-        return Objects.equals(id, attendees.id);
+        return Objects.equals( id, attendees.id );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash( id );
     }
 }

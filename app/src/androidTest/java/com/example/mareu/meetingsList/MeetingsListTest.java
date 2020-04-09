@@ -165,7 +165,7 @@ public class MeetingsListTest {
         // When perform a click on a delete icon
         onView(ViewMatchers.withId(R.id.fragment_item_list_meetings))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
-        // Then : the number of element decrease by 1
+        // Then : the number of element decreases by 1
         onView(ViewMatchers.withId(R.id.fragment_item_list_meetings)).check(withItemCount(ITEMS_COUNT - 1));
 
     }

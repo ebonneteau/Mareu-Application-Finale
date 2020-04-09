@@ -1,11 +1,6 @@
 package com.example.mareu.service;
 
 
-
-
-
-
-
 import com.example.mareu.model.Meetings;
 import com.example.mareu.model.Places;
 
@@ -43,13 +38,11 @@ public interface ReuApiService {
      */
 
 
-    void deletePlace (Places places);
+    void deletePlace(Places places);
 
-    void deleteMeeting (Meetings meetings);
+    void deleteMeeting(Meetings meetings);
 
-    void addMeeting (Meetings meetings);
-
-
+    void addMeeting(Meetings meetings);
 
 
 }

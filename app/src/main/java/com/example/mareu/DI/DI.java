@@ -14,13 +14,12 @@ public class DI {
 
     /**
      * Get an instance on @{@link ReuApiService}
+     *
      * @return
      */
     public static ReuApiService getReuApiService() {
         return service;
     }
-
-
 
 
 }

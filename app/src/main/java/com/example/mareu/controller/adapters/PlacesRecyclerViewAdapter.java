@@ -58,7 +58,7 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
                 .apply( RequestOptions.circleCropTransform() )
                 .into( holder.mFakeImageHolder );
         //Generate random colors on placeHolder
-        holder.mFakeImageHolder.setColorFilter( generator.getColor(position) );
+        holder.mFakeImageHolder.setColorFilter( generator.getColor( position ) );
 
 
         holder.mDeleteButton.setOnClickListener( v -> {

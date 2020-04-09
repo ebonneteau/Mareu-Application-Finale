@@ -102,23 +102,23 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_booking);
-        ButterKnife.bind(this);
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.activity_booking );
+        ButterKnife.bind( this );
 
         //soft input mode (manifest entry needed: android:windowSoftInputMode="adjustResize"
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN );
         //Add this on the needed view: android:fitsSystemWindows="true"
 
         // BackButton
         // Add back button with option requireNonNull
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull( getSupportActionBar() ).setDisplayShowHomeEnabled( true );
+        getSupportActionBar().setDisplayHomeAsUpEnabled( true );
 
         //De activate Validation until one attendee is entered
-        mValidationButton.setEnabled(false);
+        mValidationButton.setEnabled( false );
         //De activate add attendee button until one input field is filled
-        mAttendeeAddButton.setEnabled(false);
+        mAttendeeAddButton.setEnabled( false );
         //Request focus on mMeetingObjectInput EditText
         mMeetingObjectInput.requestFocus();
 
@@ -132,10 +132,10 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         // *******************
 
         // Get a handle to the Places RecyclerView.
-        mPlacesRecyclerView = findViewById(R.id.recycler_meeting_room);
+        mPlacesRecyclerView = findViewById( R.id.recycler_meeting_room );
         // Create an adapter and supply the data to be displayed.
         // Then match Value (or non value) with the recycler visual selection
-        mPlacesRecyclerViewAdapter = new BookingPlaceRecyclerViewAdapter(this, mBookingPlaces,
+        mPlacesRecyclerViewAdapter = new BookingPlaceRecyclerViewAdapter( this, mBookingPlaces,
                 places -> {
 
                     if (mPreviousSelectedPlace == null && mSelectedPlace == null) {
@@ -144,7 +144,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
 
                         return;
                     }
-                    if (Objects.requireNonNull(mPreviousSelectedPlace).equals(mSelectedPlace)) {
+                    if (Objects.requireNonNull( mPreviousSelectedPlace ).equals( mSelectedPlace )) {
                         mSelectedPlace = null;
                         mPreviousSelectedPlace = null;
 
@@ -155,20 +155,20 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
                         mPreviousSelectedPlace = null;
 
                     }
-                });
+                } );
         // Connect the adapter with the RecyclerView.
-        mPlacesRecyclerView.setAdapter(mPlacesRecyclerViewAdapter);
+        mPlacesRecyclerView.setAdapter( mPlacesRecyclerViewAdapter );
         // Give the RecyclerView a default layout manager.
-        mPlacesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mPlacesRecyclerView.setLayoutManager( new LinearLayoutManager( this ) );
         // Add a divider
-        mPlacesRecyclerView.addItemDecoration(new DividerItemDecoration(mPlacesRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+        mPlacesRecyclerView.addItemDecoration( new DividerItemDecoration( mPlacesRecyclerView.getContext(), DividerItemDecoration.VERTICAL ) );
 
         // **********************
         // Attendees RecyclerView
         // **********************
 
         //Activated Add attendees to list button on text input
-        mAttendeeNameAdded.addTextChangedListener(new TextWatcher() {
+        mAttendeeNameAdded.addTextChangedListener( new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -176,119 +176,119 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mAttendeeAddButton.setVisibility(View.VISIBLE);
-                mAttendeeAddButton.setEnabled(s.toString().length() != 0);
+                mAttendeeAddButton.setVisibility( View.VISIBLE );
+                mAttendeeAddButton.setEnabled( s.toString().length() != 0 );
             }
 
             @Override
             public void afterTextChanged(Editable s) {
 
             }
-        });
+        } );
         // Get a handle to the RecyclerView.
-        mAttendeesRecyclerView = findViewById(R.id.recyclerView_attendees);
+        mAttendeesRecyclerView = findViewById( R.id.recyclerView_attendees );
         // Create an adapter and supply the data to be displayed.
-        mBookingAttendeeRecyclerViewAdapter = new BookingAttendeeRecyclerViewAdapter(this, mAttendees,
-                attendees -> mAttendees.remove(attendees));
+        mBookingAttendeeRecyclerViewAdapter = new BookingAttendeeRecyclerViewAdapter( this, mAttendees,
+                attendees -> mAttendees.remove( attendees ) );
 
 
         // Connect the adapter with the RecyclerView.
-        mAttendeesRecyclerView.setAdapter(mBookingAttendeeRecyclerViewAdapter);
+        mAttendeesRecyclerView.setAdapter( mBookingAttendeeRecyclerViewAdapter );
         // Give the RecyclerView a default layout manager.
-        mAttendeesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAttendeesRecyclerView.setLayoutManager( new LinearLayoutManager( this ) );
         // Add a divider
-        mAttendeesRecyclerView.addItemDecoration(new DividerItemDecoration(mAttendeesRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+        mAttendeesRecyclerView.addItemDecoration( new DividerItemDecoration( mAttendeesRecyclerView.getContext(), DividerItemDecoration.VERTICAL ) );
 
         // Attendees add button
-        mAttendeeAddButton.setOnClickListener(view -> {
+        mAttendeeAddButton.setOnClickListener( view -> {
 
             String emailAddress = mAttendeeNameAdded.getText().toString();
-            Attendees attendees = new Attendees(mAttendees.size(), emailAddress);
-            mAttendees.add(attendees);
-            Log.d(TAG, "mAttendees size: " + mAttendees.size());
-            Objects.requireNonNull(mAttendeesRecyclerView.getAdapter()).notifyDataSetChanged();
+            Attendees attendees = new Attendees( mAttendees.size(), emailAddress );
+            mAttendees.add( attendees );
+            Log.d( TAG, "mAttendees size: " + mAttendees.size() );
+            Objects.requireNonNull( mAttendeesRecyclerView.getAdapter() ).notifyDataSetChanged();
             //Clear text
             mAttendeeNameAdded.getText().clear();
             // Turn Hint text color to blue
-            mAttendeeNameAdded.setHintTextColor(getResources().getColor(R.color.myBlue));
+            mAttendeeNameAdded.setHintTextColor( getResources().getColor( R.color.myBlue ) );
             //Hide keyboard
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(mStartTimeButton.getWindowToken(), 0);
+            InputMethodManager imm = (InputMethodManager) getSystemService( Context.INPUT_METHOD_SERVICE );
+            imm.hideSoftInputFromWindow( mStartTimeButton.getWindowToken(), 0 );
             //Activate and show Validation Button
             mValidationButton.getOnFocusChangeListener();
-            mValidationButton.setFocusable(true);
-            mValidationButton.setVisibility(View.VISIBLE);
-            mValidationButton.setFocusableInTouchMode(true);
-            mValidationButton.requestFocus(View.KEEP_SCREEN_ON);
-            mValidationButton.setEnabled(true);
+            mValidationButton.setFocusable( true );
+            mValidationButton.setVisibility( View.VISIBLE );
+            mValidationButton.setFocusableInTouchMode( true );
+            mValidationButton.requestFocus( View.KEEP_SCREEN_ON );
+            mValidationButton.setEnabled( true );
 
 
-        });
+        } );
         //***********
         //TimePickers
         //***********
 
         //Start timePicker
-        mStartTimeButton.setOnClickListener(view -> {
+        mStartTimeButton.setOnClickListener( view -> {
             //Set string value to check which TimePicker is opened
             timeTag = "from";
             //Hide keyboard
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(mStartTimeButton.getWindowToken(), 0);
+            InputMethodManager imm = (InputMethodManager) getSystemService( Context.INPUT_METHOD_SERVICE );
+            imm.hideSoftInputFromWindow( mStartTimeButton.getWindowToken(), 0 );
             DialogFragment startTimePicker = new StartTimePickerFragment();
-            startTimePicker.show(getSupportFragmentManager(), "Start_Time_Picker");
-            mStartTimeButton.setText(R.string.meeting_end_time_want_to_change);
-            mStartTimeButton.setTextColor(getResources().getColor(R.color.myBlue));
-        });
+            startTimePicker.show( getSupportFragmentManager(), "Start_Time_Picker" );
+            mStartTimeButton.setText( R.string.meeting_end_time_want_to_change );
+            mStartTimeButton.setTextColor( getResources().getColor( R.color.myBlue ) );
+        } );
         //End timePicker
 
-        mEndTimeButton.setOnClickListener(view -> {
+        mEndTimeButton.setOnClickListener( view -> {
             //Set string value to check which TimePicker is opened
             timeTag = "to";
             //Hide keyboard
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(mEndTimeButton.getWindowToken(), 0);
+            InputMethodManager imm = (InputMethodManager) getSystemService( Context.INPUT_METHOD_SERVICE );
+            imm.hideSoftInputFromWindow( mEndTimeButton.getWindowToken(), 0 );
             DialogFragment endTimePicker = new EndTimePickerFragment();
-            endTimePicker.show(getSupportFragmentManager(), "End_Time_Picker");
-        });
-        mValidationButton.setOnClickListener(view -> {
-            mMeetingObject = String.valueOf(mMeetingObjectInput.getText());
+            endTimePicker.show( getSupportFragmentManager(), "End_Time_Picker" );
+        } );
+        mValidationButton.setOnClickListener( view -> {
+            mMeetingObject = String.valueOf( mMeetingObjectInput.getText() );
             if (mMeetingObject.isEmpty()) {
 
-                mMeetingObjectInput.setFocusableInTouchMode(true);
+                mMeetingObjectInput.setFocusableInTouchMode( true );
                 mMeetingObjectInput.requestFocus();
-                Snackbar.make(view, " MEETING OBJECT MISSING !!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make( view, " MEETING OBJECT MISSING !!", Snackbar.LENGTH_LONG )
+                        .setAction( "Action", null ).show();
                 return;
 
             }
             if (mSelectedPlace == null) {
-                mBookingPlaceTextView.setFocusableInTouchMode(true);
+                mBookingPlaceTextView.setFocusableInTouchMode( true );
                 mBookingPlaceTextView.requestFocus();
-                Snackbar.make(view, " ROOM MISSING !!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make( view, " ROOM MISSING !!", Snackbar.LENGTH_LONG )
+                        .setAction( "Action", null ).show();
                 return;
             }
             if (mStartTime == null) {
-                mBookingTimeTextView.setFocusableInTouchMode(true);
+                mBookingTimeTextView.setFocusableInTouchMode( true );
                 mBookingTimeTextView.requestFocus();
-                Snackbar.make(view, " START TIME MISSING !!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make( view, " START TIME MISSING !!", Snackbar.LENGTH_LONG )
+                        .setAction( "Action", null ).show();
                 return;
             }
             if (mAttendees.size() == 0) {
-                mBookingAttendeesTextView.setFocusableInTouchMode(true);
+                mBookingAttendeesTextView.setFocusableInTouchMode( true );
                 mBookingAttendeesTextView.requestFocus();
-                Snackbar.make(view, " ATTENDEES MISSING !!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                Log.d(TAG, "size of mAttendees: " + mAttendees.size());
+                Snackbar.make( view, " ATTENDEES MISSING !!", Snackbar.LENGTH_LONG )
+                        .setAction( "Action", null ).show();
+                Log.d( TAG, "size of mAttendees: " + mAttendees.size() );
             } else {
                 mApiService = DI.getReuApiService();
-                mApiService.addMeeting(new Meetings(mApiService.getMeetings().size(),
-                        mMeetingObject, mStartTime, mEndTime, mSelectedPlace, mAttendees));
+                mApiService.addMeeting( new Meetings( mApiService.getMeetings().size(),
+                        mMeetingObject, mStartTime, mEndTime, mSelectedPlace, mAttendees ) );
                 finish();
             }
-        });
+        } );
     }
     //*************
     //Other methods
@@ -302,36 +302,36 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             this.finish();
 
         }
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected( item );
     }
 
     //Methods for timePickers
     @Override
     public void onTimeSet(TimePicker startTimePicker, int Hour, int Minute) {
-        if (Objects.equals(timeTag, "from")) {
+        if (Objects.equals( timeTag, "from" )) {
 
             //Always set time as a String with 2 digits number format
-            mMeetingStartTime.setText(new StringBuilder().append("Meeting starts at: ")
-                    .append(String.format(Locale.FRANCE, "%02d", Hour)).append(":")
-                    .append(String.format(Locale.FRANCE, "%02d", Minute)).toString());
+            mMeetingStartTime.setText( new StringBuilder().append( "Meeting starts at: " )
+                    .append( String.format( Locale.FRANCE, "%02d", Hour ) ).append( ":" )
+                    .append( String.format( Locale.FRANCE, "%02d", Minute ) ).toString() );
             mStartHour = Hour;
             mStartMinute = Minute;
             //Always set time as a String with 2 digits number format
-            mStartTime = String.format(Locale.FRANCE, "%02d", mStartHour)
-                    + "h" + String.format(Locale.FRANCE, "%02d", mStartMinute);
+            mStartTime = String.format( Locale.FRANCE, "%02d", mStartHour )
+                    + "h" + String.format( Locale.FRANCE, "%02d", mStartMinute );
             calculateMeetingEndTime();
         }
-        if (Objects.equals(timeTag, "to")) {
+        if (Objects.equals( timeTag, "to" )) {
 
             //Always set time as a String with 2 digits number format
-            mMeetingEndTime.setText(new StringBuilder().append("Meeting starts at: ")
-                    .append(String.format(Locale.FRANCE, "%02d", Hour)).append(":")
-                    .append(String.format(Locale.FRANCE, "%02d", Minute)).toString());
+            mMeetingEndTime.setText( new StringBuilder().append( "Meeting starts at: " )
+                    .append( String.format( Locale.FRANCE, "%02d", Hour ) ).append( ":" )
+                    .append( String.format( Locale.FRANCE, "%02d", Minute ) ).toString() );
             mEndHour = Hour;
             mEndMinute = Minute;
             //Always set time as a String with 2 digits number format
-            mEndTime = String.format(Locale.FRANCE, "%02d", mEndHour)
-                    + ("h") + (String.format(Locale.FRANCE, "%02d", mEndMinute));
+            mEndTime = String.format( Locale.FRANCE, "%02d", mEndHour )
+                    + ("h") + (String.format( Locale.FRANCE, "%02d", mEndMinute ));
         }
     }
 
@@ -341,36 +341,36 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             mEndMinute = mStartMinute - 15;
 
             mEndHour = mStartHour + 1;
-            mMeetingEndTime = findViewById(R.id.meeting_end_time_text);
-            mMeetingEndTime.setText(new StringBuilder().append("Meeting ends at: ")
-                    .append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
-                    .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString());
+            mMeetingEndTime = findViewById( R.id.meeting_end_time_text );
+            mMeetingEndTime.setText( new StringBuilder().append( "Meeting ends at: " )
+                    .append( String.format( Locale.FRANCE, "%02d", mEndHour ) ).append( ":" )
+                    .append( String.format( Locale.FRANCE, "%02d", mEndMinute ) ).toString() );
             //mEndTime is the same value without text "Meetings ends at: "
-            mEndTime = new StringBuilder().append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
-                    .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString();
+            mEndTime = new StringBuilder().append( String.format( Locale.FRANCE, "%02d", mEndHour ) ).append( ":" )
+                    .append( String.format( Locale.FRANCE, "%02d", mEndMinute ) ).toString();
 
         }
         if (mStartMinute + 45 == 60) {
             mEndMinute = 0;
             mEndHour = mStartHour + 1;
-            mMeetingEndTime = findViewById(R.id.meeting_end_time_text);
-            mMeetingEndTime.setText(new StringBuilder().append("Meeting ends at: ")
-                    .append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
-                    .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString());
+            mMeetingEndTime = findViewById( R.id.meeting_end_time_text );
+            mMeetingEndTime.setText( new StringBuilder().append( "Meeting ends at: " )
+                    .append( String.format( Locale.FRANCE, "%02d", mEndHour ) ).append( ":" )
+                    .append( String.format( Locale.FRANCE, "%02d", mEndMinute ) ).toString() );
             //mEndTime is the same value without text "Meetings ends at: "
-            mEndTime = new StringBuilder().append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
-                    .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString();
+            mEndTime = new StringBuilder().append( String.format( Locale.FRANCE, "%02d", mEndHour ) ).append( ":" )
+                    .append( String.format( Locale.FRANCE, "%02d", mEndMinute ) ).toString();
         }
         if (mStartMinute + 45 < 60) {
             mEndMinute = mStartMinute + 45;
             mEndHour = mStartHour;
-            mMeetingEndTime = findViewById(R.id.meeting_end_time_text);
-            mMeetingEndTime.setText(new StringBuilder().append("Meeting ends at: ")
-                    .append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
-                    .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString());
+            mMeetingEndTime = findViewById( R.id.meeting_end_time_text );
+            mMeetingEndTime.setText( new StringBuilder().append( "Meeting ends at: " )
+                    .append( String.format( Locale.FRANCE, "%02d", mEndHour ) ).append( ":" )
+                    .append( String.format( Locale.FRANCE, "%02d", mEndMinute ) ).toString() );
             //mEndTime is the same value without text "Meetings ends at: "
-            mEndTime = new StringBuilder().append(String.format(Locale.FRANCE, "%02d", mEndHour)).append(":")
-                    .append(String.format(Locale.FRANCE, "%02d", mEndMinute)).toString();
+            mEndTime = new StringBuilder().append( String.format( Locale.FRANCE, "%02d", mEndHour ) ).append( ":" )
+                    .append( String.format( Locale.FRANCE, "%02d", mEndMinute ) ).toString();
         }
     }
 

@@ -36,6 +36,7 @@ public class RecyclerViewExternalMethods implements ViewAssertion {
 
         RecyclerView recyclerView = (RecyclerView) view;
         RecyclerView.Adapter adapter = recyclerView.getAdapter();
+        assert adapter != null;
         Assert.assertThat(adapter.getItemCount(), matcher);
     }
     public static ViewAction waitFor(final long millis) {

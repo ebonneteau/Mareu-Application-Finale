@@ -11,7 +11,7 @@ import com.example.mareu.controller.fragments.PlacesFragment;
 public class ListMeetingsPagerAdapter extends FragmentPagerAdapter {
 
     public ListMeetingsPagerAdapter(FragmentManager fm) {
-        super(fm);
+        super( fm );
     }
 
     /**
@@ -32,13 +32,12 @@ public class ListMeetingsPagerAdapter extends FragmentPagerAdapter {
      */
     @Override
     public Fragment getItem(int position) {
-        if (position == 0){
-            return MeetingsFragment.newInstance(0);
+        if (position == 0) {
+            return MeetingsFragment.newInstance( 0 );
         }
-        if (position == 1){
-            return PlacesFragment.newInstance(1);
-        }
-        else {
+        if (position == 1) {
+            return PlacesFragment.newInstance( 1 );
+        } else {
             return null;
         }
 

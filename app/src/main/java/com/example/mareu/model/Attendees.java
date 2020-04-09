@@ -1,24 +1,25 @@
 package com.example.mareu.model;
 
 
-
 import java.util.Objects;
 
 public class Attendees {
 
 
-    /** Identifier */
+    /**
+     * Identifier
+     */
     private Integer id;
 
-    /** Full name */
+    /**
+     * Full name
+     */
     private String mailAddress;
-
-
-
 
 
     /**
      * Constructor
+     *
      * @param id
      * @param mailAddress
      */
@@ -32,6 +33,7 @@ public class Attendees {
     public Integer getId() {
         return id;
     }
+
     //Added method to display list of list in a string format
     @Override
     public String toString() {
@@ -46,11 +48,10 @@ public class Attendees {
         return mailAddress;
     }
 
+    //For later usage
     public void setmailAddress(String mailAddress) {
         this.mailAddress = mailAddress;
     }
-
-
 
 
     @Override
@@ -58,11 +59,11 @@ public class Attendees {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Attendees attendees = (Attendees) o;
-        return Objects.equals(id, attendees.id);
+        return Objects.equals( id, attendees.id );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash( id );
     }
 }

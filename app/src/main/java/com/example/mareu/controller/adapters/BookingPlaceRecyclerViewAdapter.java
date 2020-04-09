@@ -22,13 +22,12 @@ public class BookingPlaceRecyclerViewAdapter extends RecyclerView.Adapter<Bookin
     private List<Places> mBookingPlaces;
     private LayoutInflater mInflater;
     private ReuApiService mApiService;
-    private static final String TAG = "RecyclerPlaces";
     private OnSelectedBookedRoom mBookedRoom;
     private int selected_position = -1;
     private int old_position = -1;
 
-    public BookingPlaceRecyclerViewAdapter(Context context, List<Places> places, OnSelectedBookedRoom bookedRoom ) {
-        mInflater = LayoutInflater.from(context);
+    public BookingPlaceRecyclerViewAdapter(Context context, List<Places> places, OnSelectedBookedRoom bookedRoom) {
+        mInflater = LayoutInflater.from( context );
         this.mBookedRoom = bookedRoom;
         this.mBookingPlaces = places;
     }
@@ -36,54 +35,55 @@ public class BookingPlaceRecyclerViewAdapter extends RecyclerView.Adapter<Bookin
     @NonNull
     @Override
     public BookingPlaceRecyclerViewAdapter.PlacesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View mItemView = mInflater.inflate(R.layout.fragment_booked_place_item, parent, false);
+        View mItemView = mInflater.inflate( R.layout.fragment_booked_place_item, parent, false );
 
-        return new PlacesViewHolder (mItemView, this);
+        return new PlacesViewHolder( mItemView, this );
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull PlacesViewHolder holder, int position) {
         int mPosition = holder.getAdapterPosition();
-        Places places = mBookingPlaces.get(position);
-        holder.mPlacesListView.setText(places.getPlace());
-        holder.itemView.setBackgroundColor(holder.itemView.getResources().getColor(R.color.item_un_selected));
-        holder.itemView.setOnClickListener(view -> {
+        Places places = mBookingPlaces.get( position );
+        holder.mPlacesListView.setText( places.getPlace() );
+        holder.itemView.setBackgroundColor( holder.itemView.getResources().getColor( R.color.item_un_selected ) );
+        holder.itemView.setOnClickListener( view -> {
 
             //change color on clicked item
-            if ((selected_position == -1)&& (old_position == -1)){
+            if ((selected_position == -1) && (old_position == -1)) {
                 //notifyDataSetChanged();
-                holder.itemView.setBackgroundColor(view.getResources().getColor(R.color.button_pressed_false));
-                mBookedRoom.onClick(places);
-                Snackbar.make(view, "Confirmation: " + holder.mPlacesListView.getText() + " is booked !" , Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                holder.itemView.setBackgroundColor( view.getResources().getColor( R.color.button_pressed_false ) );
+                mBookedRoom.onClick( places );
+                Snackbar.make( view, "Confirmation: " + holder.mPlacesListView.getText() + " is booked !", Snackbar.LENGTH_LONG )
+                        .setAction( "Action", null ).show();
 
                 selected_position = mPosition;
                 old_position = mPosition;
                 return;
 
             }
-            if (selected_position == mPosition && old_position == mPosition){
-                holder.itemView.setBackgroundColor(view.getResources().getColor(R.color.item_un_selected));
-                mBookedRoom.onClick(places);
-                Snackbar.make(view,  "Confirmation: " + holder.mPlacesListView.getText() + " is cancelled !", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            if (selected_position == mPosition && old_position == mPosition) {
+                holder.itemView.setBackgroundColor( view.getResources().getColor( R.color.item_un_selected ) );
+                mBookedRoom.onClick( places );
+                Snackbar.make( view, "Confirmation: " + holder.mPlacesListView.getText() + " is cancelled !", Snackbar.LENGTH_LONG )
+                        .setAction( "Action", null ).show();
 
                 old_position = -1;
                 selected_position = -1;
                 return;
 
-            }if (old_position != mPosition && selected_position != mPosition ){
+            }
+            if (old_position != mPosition && selected_position != mPosition) {
                 notifyDataSetChanged();
-                mBookedRoom.onClick(places);
+                mBookedRoom.onClick( places );
                 old_position = -1;
                 selected_position = -1;
 
-                Snackbar.make(view,  " PLEASE SELECT A ROOM", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make( view, " PLEASE SELECT A ROOM", Snackbar.LENGTH_LONG )
+                        .setAction( "Action", null ).show();
             }
 
-        });
+        } );
 
 
     }
@@ -96,18 +96,20 @@ public class BookingPlaceRecyclerViewAdapter extends RecyclerView.Adapter<Bookin
         return mBookingPlaces.size();
 
     }
-    class PlacesViewHolder extends RecyclerView.ViewHolder{
-        public final TextView mPlacesListView;
+
+    class PlacesViewHolder extends RecyclerView.ViewHolder {
+        final TextView mPlacesListView;
         final BookingPlaceRecyclerViewAdapter mAdapter;
 
-        public PlacesViewHolder(@NonNull View itemView, BookingPlaceRecyclerViewAdapter adapter ) {
-            super(itemView);
-            mPlacesListView = itemView.findViewById(R.id.a_place);
+        PlacesViewHolder(@NonNull View itemView, BookingPlaceRecyclerViewAdapter adapter) {
+            super( itemView );
+            mPlacesListView = itemView.findViewById( R.id.a_place );
             this.mAdapter = adapter;
         }
     }
+
     //interface to rescue selected booked room in BookingActivity
     public interface OnSelectedBookedRoom {
-         void onClick(Places places);
+        void onClick(Places places);
     }
 }

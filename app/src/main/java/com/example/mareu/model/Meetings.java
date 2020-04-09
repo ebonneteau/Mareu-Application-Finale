@@ -1,7 +1,6 @@
 package com.example.mareu.model;
 
 
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,27 +9,40 @@ import java.util.Objects;
 public class Meetings {
 
 
-    /** Identifier */
+    /**
+     * Identifier
+     */
     private Integer id;
 
-    /** Meeting object */
+    /**
+     * Meeting object
+     */
     private String object;
 
-    /** StartTime */
+    /**
+     * StartTime
+     */
     private String startTime;
 
-    /** EndTime */
+    /**
+     * EndTime
+     */
     private String endTime;
 
 
-    /** Place */
+    /**
+     * Place
+     */
     private String place;
 
-    /** Attendees */
+    /**
+     * Attendees
+     */
     private List<Attendees> attendees;
 
     /**
      * Constructor
+     *
      * @param id
      * @param object
      * @param startTime
@@ -39,16 +51,14 @@ public class Meetings {
      * @param attendees
      */
 
-    public Meetings(Integer id, String object, String startTime,String endTime, String place, List<Attendees> attendees) {
+    public Meetings(Integer id, String object, String startTime, String endTime, String place, List<Attendees> attendees) {
         this.id = id;
         this.object = object;
         this.startTime = startTime;
         this.endTime = endTime;
         this.place = place;
-        this.attendees =  attendees;
+        this.attendees = attendees;
     }
-
-
 
 
     public Integer getId() {
@@ -76,14 +86,15 @@ public class Meetings {
     }
 
     public List<Attendees> getAttendees() {
-        return  attendees;
+        return attendees;
     }
 
-
+    //For later usage
     public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
+    //For later usage
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
@@ -92,6 +103,7 @@ public class Meetings {
         return place;
     }
 
+    //For later usage
     public void setPlace(String place) {
         this.place = place;
     }
@@ -101,11 +113,11 @@ public class Meetings {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Meetings meetings = (Meetings) o;
-        return Objects.equals(id, meetings.id);
+        return Objects.equals( id, meetings.id );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash( id );
     }
 }

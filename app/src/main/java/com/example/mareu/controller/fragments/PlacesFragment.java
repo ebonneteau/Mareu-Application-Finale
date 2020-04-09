@@ -46,7 +46,7 @@ public class PlacesFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate( savedInstanceState );
         mApiService = DI.getReuApiService();
 
     }
@@ -54,13 +54,13 @@ public class PlacesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_places_list, container, false);
+        View view = inflater.inflate( R.layout.fragment_places_list, container, false );
 
         Context context = view.getContext();
         mRecyclerView = (RecyclerView) view;
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        mRecyclerView.setLayoutManager( new LinearLayoutManager( context ) );
         //Added requireNonNull option
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.VERTICAL));
+        mRecyclerView.addItemDecoration( new DividerItemDecoration( Objects.requireNonNull( getContext() ), DividerItemDecoration.VERTICAL ) );
 
         initList();
 
@@ -73,19 +73,19 @@ public class PlacesFragment extends Fragment {
     private void initList() {
 
         mPlaces = mApiService.getPlaces();
-        mRecyclerView.setAdapter(new PlacesRecyclerViewAdapter(mPlaces));
+        mRecyclerView.setAdapter( new PlacesRecyclerViewAdapter( mPlaces ) );
     }
 
     @Override
     public void onStart() {
         super.onStart();
-       EventBus.getDefault().register(this);
+        EventBus.getDefault().register( this );
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        EventBus.getDefault().unregister(this);
+        EventBus.getDefault().unregister( this );
     }
 
     /**
@@ -94,9 +94,9 @@ public class PlacesFragment extends Fragment {
      * @param event
      */
     @Subscribe
-    public void onDeletePlace (DeletePlaceEvent event) {
-      mApiService.deletePlace(event.places);
-      Objects.requireNonNull(mRecyclerView.getAdapter()).notifyDataSetChanged();
+    public void onDeletePlace(DeletePlaceEvent event) {
+        mApiService.deletePlace( event.places );
+        Objects.requireNonNull( mRecyclerView.getAdapter() ).notifyDataSetChanged();
 
     }
 
